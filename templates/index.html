@@ -9,140 +9,127 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Round About - Start Bootstrap Template</title>
-
+    <title>The Grateful Brauer</title>
+    <link rel="icon" href="favicon.ico?v1" type="image/x-icon" />
+    
     <!-- Bootstrap Core CSS -->
-    <link href="../static/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="/static/bootstrap.min.css" rel="stylesheet">-->
 
-    <!-- Custom CSS -->
-    <link href="../static/round-about.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- Custum CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/custom.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
+
+
+
 
 </head>
 
 <body>
 
+
+<h1 class="sitetitle">THE GRATEFUL BRAUER</h1>
+
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <!--<a class="navbar-brand" href="/">The Greatful Brauer ;)</a>-->
             </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
+              <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li class="dropdown">
+                  <a href="/Ales" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Ales
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/Ales"> [ All Ales ] </a></li>
+                    <li><a href="/Ales/Belgian_Dark_Strong.html">Belgian Dark Strong</a></li>
+                    <li><a href="/Ales/Belgian_Golden_Strong.html">Belgian Golden Strong</a></li>
+                    <li><a href="/Ales/Porter.html">Porter</a></li>
+                    <li><a href="/Ales/Rye_Pale_Ale.html">Rye Pale Ale</a></li>
+                    <li><a href="/Ales/Saison.html">Saison</a></li>
+                    <li><a href="/Ales/Scottish_60.html">Scottish 60/-</a></li>
+                    <li><a href="/Ales/Scottish_70.html">Scottish 70/-</a></li>
+                    <!--<li role="separator" class="divider"></li>-->
+                  </ul>
+                </li>
+
+                <li class="dropdown">
+                  <a href="/Ales" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  Lagers
+                  <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/Lagers"> [ All Lagers ] </a></li>
+                    <li><a href="Lagers/Altbier.html">Altbier</a></li>
+                    <li><a href="Lagers/Berliner_Weisse.html">Berliner Weisse</a></li>
+                    <li><a href="Lagers/Bock.html">Bock</a></li>
+                    <li><a href="Lagers/Kolsch.html">Kolsch</a></li>
+                    <li><a href="Lagers/Schwarzbier.html">Schwarzbier</a></li>
+                    <!--<li role="separator" class="divider"></li>-->
+                  </ul>
+                </li>
+
+                <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
+                <li class="disabled"><a href="#">Yeast</a></li>
+                <li class="disabled"><a href="#">Brewculator</a></li>
+                <li class="disabled"><a href="#">About</a></li>
+
+              </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        <!-- Introduction Row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">About Us
-                    <small>It's Nice to Meet You!</small>
-                </h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
-            </div>
-        </div>
-
-        <!-- Team Members Row -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h2 class="page-header">Our Team</h2>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3><a href="static/Scottish.html">John Smith</a>
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-            <div class="col-lg-4 col-sm-6 text-center">
-                <img class="img-circle img-responsive img-center" src="http://placehold.it/200x200" alt="">
-                <h3>John Smith
-                    <small>Job Title</small>
-                </h3>
-                <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
-            </div>
-        </div>
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-        </footer>
-
-    </div>
     <!-- /.container -->
 
-    <!-- jQuery -->
-    <script src="../static/jquery.js"></script>
+    <h1 class="greetings">Beer is good.</h1>
+    
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../static/bootstrap.min.js"></script>
+    <div class="container">
+    <div class="row imagetiles">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <a href="/Lagers"><img src="../static/img/Lagers-Homepage.jpg" class="img-responsive" alt="Lagers-Homepage"></a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <a href="/Ales"><img src="../static/img/Ales-Homepage.jpg" class="img-responsive" alt="Ales-Homepage"></a>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <a href="#"><img src="../static/img/Yeast-Homepage.jpg" class="img-responsive" alt="Yeast-Homepage"></a>
+        </div>
+    </div>
+    </div>
+
+
+    
+    <!--<img src="../static/img/Lagers-Homepage.jpg" class="img-fluid" alt="Responsive image">-->
+
+
+    <blockquote>
+    <p class="main text-left lead">
+    I started brewing in January 2014 with my good friend Ben. In the beginning, we were in a frenzy of exploring as many beer styles and brewing techniques as possible. In 2014, we brewed ten unique styles, which were all drinkable, but still had that taste of "home brew". After visiting the Mystic Brewery in Chelsea, MA last April 2015, I was astonished how unique their beer was. It simultaneously matched the beer style they were shooting for, yet had a subtle (truly mystic) flavor that made it new and unique. This moment really inspired me to go on a journey to make a beer that makes me feel this way. The philosophy of this blog is to record my progress and experimentation with making a beer that is true to style, but somehow different than what you've had before. And my ultimate goal is to have someone drink my beer and be surprised that it came out of an ordinary man's kitchen (or more accurately, his friends' kitchen).
+    </p>
+    <footer> Kyle </footer>
+    </blockquote>
+
+
+
+    <!-- jQuery -->
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <!-- Bootstrap -->    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>    
 
 </body>
 

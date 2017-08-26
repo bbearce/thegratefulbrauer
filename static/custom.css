@@ -1,0 +1,51 @@
+body {
+	background-color: #FFFFFF;
+}
+
+h1.sitetitle{
+	text-align: center;
+	margin: 50px 0px 20px 0px;
+	font-size: 200%;
+	font-weight: bold;
+
+}
+
+h1.greetings{
+	text-align: center;
+	margin: 40px 0px 90px 0px;
+	font-size: 300%;
+}
+
+p.main {
+	text-align: left;
+	font-style: italic;
+	font-family: "Times New Roman", Times, serif;
+	margin-top: 10%;
+    margin-bottom: 10%;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+blockquote footer {
+	font: 400 italic 16px “futura-pt”, Arial, sans-serif;
+	margin-top: 5%;
+	margin-bottom: 30%;
+	position: absolute;
+	right: 20%;
+	
+}
+
+div.imagetiles div.col-lg-4.col-md-4.col-sm-4.col-xs-4{
+  padding: 1%;
+}
+
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
