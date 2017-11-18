@@ -114,74 +114,10 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-
-
-
-<h1 class="sitetitle">THE GRATEFUL BRAUER</h1>
-
-<!-- Navigation -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!--<a class="navbar-brand" href="/">The Greatful Brauer ;)</a>-->
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li class="dropdown">
-                  <a href="/Ales" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  Ales
-                  <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/Ales"> [ All Ales ] </a></li>
-                    <li><a href="/Ales/Belgian_Dark_Strong.html">Belgian Dark Strong</a></li>
-                    <li><a href="/Ales/Belgian_Golden_Strong.html">Belgian Golden Strong</a></li>
-                    <li><a href="/Ales/Porter.html">Porter</a></li>
-                    <li><a href="/Ales/Rye_Pale_Ale.html">Rye Pale Ale</a></li>
-                    <li><a href="/Ales/Saison.html">Saison</a></li>
-                    <li><a href="/Ales/Scottish_60.html">Scottish 60/-</a></li>
-                    <li><a href="/Ales/Scottish_70.html">Scottish 70/-</a></li>
-                    <!--<li role="separator" class="divider"></li>-->
-                  </ul>
-                </li>
-
-                <li class="dropdown">
-                  <a href="/Ales" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  Lagers
-                  <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/Lagers"> [ All Lagers ] </a></li>
-                    <li><a href="/Lagers/Altbier.html">Altbier</a></li>
-                    <li><a href="/Lagers/Berliner_Weisse.html">Berliner Weisse</a></li>
-                    <li><a href="/Lagers/Bock.html">Bock</a></li>
-                    <li><a href="/Lagers/Kolsch.html">Kolsch</a></li>
-                    <li><a href="/Lagers/Schwarzbier.html">Schwarzbier</a></li>
-                    <!--<li role="separator" class="divider"></li>-->
-                  </ul>
-                </li>
-
-                <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>-->
-                <li class="disabled"><a href="#">Yeast</a></li>
-                <li class="disabled"><a href="#">Brewculator</a></li>
-                <li class="disabled"><a href="#">About</a></li>
-
-              </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <!-- /.container -->
-
-
-
+<!-- Navigation Bar -->
+{% extends "nav-bar.html" %}
+{% block Content_or_Rmd %}
+<!-- Navigation Bar -->
 
 <div class="fluid-row" id="header">
 
@@ -282,4 +218,5 @@ $(document).ready(function () {
 </script>
 
 </body>
+{% endblock %}
 </html>
