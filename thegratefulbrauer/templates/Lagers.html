@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The Grateful Brauer</title>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    
+    <!-- Bootstrap Core CSS -->
+    <!--<link href="/static/bootstrap.min.css" rel="stylesheet">-->
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- Custum CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/custom.css">
+
+</head>
+
+
+
+{% extends "nav-bar.html" %}
+{% block Content_or_Rmd %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Lagers
+                    <small>Cold Fermented Gems</small>
+                </h1>
+                <p>Crisp, Clean, Clear</p>
+            </div>
+        </div>
+
+        <!-- Team Members Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Tap List</h2>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive center-block" src="../static/img/beer_photos/altbier_200_x_200.jpg" alt="">
+                <h3><a href="Lagers/Altbier.html">Altbier</a>
+                    
+                </h3>
+                <p>A very clean and relatively bitter beer, balanced by some malt character. Generally darker, sometimes more caramelly, and usually sweeter and less bitter than Düsseldorf Altbier</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive center-block" src="../static/img/beer_photos/berliner-weisse_200_x_200.jpg" alt="">
+                <h3><a href="Lagers/Berliner_Weisse.html">Beliner Weisse</a>
+                    
+                </h3>
+                <p>A very pale, sour, refreshing, low-alcohol wheat ale</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive center-block" src="../static/img/beer_photos/bock_200_x_200.jpg" alt="">
+                <h3><a href="Lagers/Bock.html">Bock</a>
+                    
+                </h3>
+                <p>A relatively pale, strong, malty lager beer. Designed to walk a fine line between blandness and too much color. Hop character is generally more apparent than in other bocks</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive center-block" src="../static/img/beer_photos/kolsch_200_x_200.jpg" alt="">
+                <h3><a href="Lagers/Kolsch.html">Kolsch</a>
+                    
+                </h3>
+                <p>A clean, well-attenuated, flavorful American lawnmower beer</p>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center">
+                <img class="img-circle img-responsive center-block" src="../static/img/beer_photos/schwarzbier_200_x_200.jpg" alt="">
+                <h3><a href="Lagers/Schwarzbier.html">Schwarzbier</a>
+                    
+                </h3>
+                <p>A somewhat sweeter version of standard/premium lager with a little more body and flavor</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; The Grateful Brauer 2015</p>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../../static/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../static/bootstrap.min.js"></script>
+{% endblock %}
+
+</html>
