@@ -12,12 +12,12 @@
     <title>The Grateful Brauer</title>
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    
+
     <!-- Bootstrap Core CSS -->
     <!--<link href="/static/bootstrap.min.css" rel="stylesheet">-->
 
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
+
     <!-- Custum CSS -->
     <link rel="stylesheet" type="text/css" href="../static/custom.css">
 
@@ -28,7 +28,7 @@
 
     <!-- Page Content -->
     <h1 class="greetings">Beer is good.</h1>
-    
+
 
     <div class="container">
     <div class="row imagetiles">
@@ -45,7 +45,7 @@
     </div>
 
 
-    
+
     <!--<img src="../static/img/Lagers-Homepage.jpg" class="img-fluid" alt="Responsive image">-->
 
 
@@ -56,14 +56,45 @@
     <footer> Kyle </footer>
     </blockquote>
 
-
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Ingredients</th>
+      <th scope="col">Degree Linter</th>
+      <th scope="col">Value</th>
+      <th scope="col">PPG</th>
+      <th scope="col">SRM</th>
+      <th scope="col">EZ_Water_Code</th>
+      <th scope="col">Flavor_Profile</th>
+      <th scope="col">DP</th>
+      <th scope="col">Is_Grain</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ingredient in all_fermentables%}
+    <tr>
+      <th scope="row">{{ ingredient.id }}</th>
+      <td>{{ ingredient.ingredients }}</td>
+      <td>{{ ingredient.degree_linter }}</td>
+      <td>{{ ingredient.value }}</td>
+      <td>{{ ingredient.ppg }}</td>
+      <td>{{ ingredient.srm }}</td>
+      <td>{{ ingredient.ez_water_code }}</td>
+      <td>{{ ingredient.flavor_profile }}</td>
+      <td>{{ ingredient.dp }}</td>
+      <td>{{ ingredient.is_grain }}</td>
+    {% endfor %}
+    </tr>
+  </tbody>
+</table>
 
     <!-- jQuery -->
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
-    <!-- Bootstrap -->    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>    
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 
 {% endblock %}
 
