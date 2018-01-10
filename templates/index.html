@@ -56,38 +56,7 @@
     <footer> Kyle </footer>
     </blockquote>
 
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Ingredients</th>
-      <th scope="col">Degree Linter</th>
-      <th scope="col">Value</th>
-      <th scope="col">PPG</th>
-      <th scope="col">SRM</th>
-      <th scope="col">EZ_Water_Code</th>
-      <th scope="col">Flavor_Profile</th>
-      <th scope="col">DP</th>
-      <th scope="col">Is_Grain</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for ingredient in all_fermentables%}
-    <tr>
-      <th scope="row">{{ ingredient.id }}</th>
-      <td>{{ ingredient.ingredients }}</td>
-      <td>{{ ingredient.degree_linter }}</td>
-      <td>{{ ingredient.value }}</td>
-      <td>{{ ingredient.ppg }}</td>
-      <td>{{ ingredient.srm }}</td>
-      <td>{{ ingredient.ez_water_code }}</td>
-      <td>{{ ingredient.flavor_profile }}</td>
-      <td>{{ ingredient.dp }}</td>
-      <td>{{ ingredient.is_grain }}</td>
-    {% endfor %}
-    </tr>
-  </tbody>
-</table>
+    
 
     <!-- jQuery -->
 

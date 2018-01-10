@@ -94,8 +94,8 @@ class gravity_correction_chart(db.Model):
 
 @app.route("/")
 def index():
-    all_fermentables = Fermentables.query.all()
-    return render_template("index.html", all_fermentables = all_fermentables)
+    #all_fermentables = Fermentables.query.all()
+    return render_template("index.html")#, all_fermentables = all_fermentables)
 
 @app.route("/Ales")
 def Ales():
