@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -112,5 +112,5 @@ def Specific_Lagers(name):
     return render_template("Lagers/"+name)
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 33507))
     app.run(host='0.0.0.0', port=port)
