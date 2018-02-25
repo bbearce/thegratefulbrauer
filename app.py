@@ -37,7 +37,7 @@ class Fermentables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ingredients = db.Column(db.String(64), unique=True)
     degree_linter = db.Column(db.String(5))
-    value = db.Column(db.Integer)
+    value = db.Column(db.Float)
     ppg = db.Column(db.Float)
     srm = db.Column(db.Float)
     ez_water_code = db.Column(db.Integer)
@@ -113,8 +113,8 @@ class gravity_correction_chart(db.Model):
 
 @app.route("/")
 def index():
-    role = Role.query.all()[0].name
-    return render_template("index.html", role = role)
+    ingredient = Fermentables.query.filter_by(id=2).all()[0].ingredients
+    return render_template("index.html", ingredient = ingredient)
 
 @app.route("/Ales")
 def Ales():
