@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template
-from flask_script import Manager
+#from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-manager = Manager(app)
+#manager = Manager(app)
 
 class Role(db.Model):
     __tablename__ = 'roles'
