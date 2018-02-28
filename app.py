@@ -55,8 +55,8 @@ class Hops(db.Model):
     value = db.Column(db.Float)
     alphaLow = db.Column(db.Float)
     alphaHigh = db.Column(db.Float)
-    flavorProfile = db.Column(db.String(200))
-    possibleSubstitutions = db.Column(db.String(64))
+    flavorProfile = db.Column(db.Text)
+    possibleSubstitutions = db.Column(db.Text)
     orgin = db.Column(db.String(64))
     storage = db.Column(db.String(64))
     additionalInformation_History = db.Column(db.Text)
@@ -76,7 +76,7 @@ class Yeast(db.Model):
     alcoholTolerancePercentLow = db.Column(db.Float)
     alcoholTolerancePercentHigh = db.Column(db.Float)
     flavorCharacteristics = db.Column(db.Text)
-    recommendedStyles = db.Column(db.String(64))
+    recommendedStyles = db.Column(db.Text)
     brewery = db.Column(db.String(64))
 
     def __repr__(self):
@@ -104,17 +104,21 @@ class gravity_correction_chart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     temperature_F= db.Column(db.Integer)
     temperature_C= db.Column(db.Integer)
-    add_SG = db.Column(db.Integer)
+    add_SG = db.Column(db.Float)
 
     def __repr__(self):
-        return '<Role %r>' % self.temperature_C
+        return '<Temperature %r>' % self.temperature_C
 
 # Database - End
 
 @app.route("/")
 def index():
-    ingredient = Fermentables.query.filter_by(id=2).all()[0].ingredients
-    return render_template("index.html", ingredient = ingredient)
+    fer = Fermentables.query.all()
+    hop = Hops.query.all()
+    sty = Styles.query.all()
+    yea = Yeast.query.all()
+    gcc = gravity_correction_chart.query.all()
+    return render_template("index.html", fer=fer, hop=hop, sty=sty, yea=yea, gcc=gcc)
 
 @app.route("/Ales")
 def Ales():
