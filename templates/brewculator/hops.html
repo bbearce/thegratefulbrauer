@@ -1,0 +1,77 @@
+<div class='container'>
+  <div class='hops-input-div'>
+    
+    <h3>Hops</h3>
+
+      {% for column_set in hops_columns %}
+        <div style='display: block;'>
+
+          <div style='display: block;'>
+            <label style='display: block;'>{{ column_set[0][0]|capitalize }}{{ column_set[0][1] }}</label>
+            <select name='{{ column_set[0][0] }}{{ column_set[0][1] }}'>      
+                {% for ingredient in Hops %}
+                    <option> {{ ingredient.hops }}</option>  
+                {% endfor %}
+            </select>
+          </div>
+
+          <div style='display: block;'>
+            <label style='display: block;'>{{ column_set[1][0]|capitalize }}{{ column_set[1][1] }}</label>
+            <input type=text size=10 name={{ column_set[1][0] }}{{ column_set[1][1] }} value=1>
+          </div>
+
+          <div style='display: block;'>
+            <label style='display: block;'>{{ column_set[2][0]|capitalize }}{{ column_set[2][1] }}</label>
+            <input type=text size=10 name={{ column_set[2][0] }}{{ column_set[2][1] }} value=1>
+          </div>
+
+
+        </div>
+
+      {%  endfor %}
+
+  </div>
+
+  <div class='hops-app-div'>
+    
+    <h3>Hops Summary</h3>
+
+    <h3>Current IBU: <span id=total_ibu>0.000</span></h3>
+
+    <div class=hopsChartDiv  style='width: 70%;'>
+    <canvas id="hopsChart"></canvas>
+    </div>
+
+    <br>
+    <!--  IBU Table details  -->
+    <br>
+
+    <table style="width:100%">
+      <tr>
+        <th>Hop</th>
+        <th>IBU</th> 
+        <th>Alpha Acid</th>
+        <th>Utilization</th>
+      </tr>
+      <tr>
+        <th id=Hop1>Hop1</th>
+        <th id=ibu1>0</th> 
+        <th id=alpha_acid1>0</th>
+        <th id=utilization1>0</th>
+      </tr>
+      <tr>
+        <th id=Hop2>Hop2</th>
+        <th id=ibu2>0</th> 
+        <th id=alpha_acid2>0</th>
+        <th id=utilization2>0</th>
+      </tr>
+      <tr>
+        <th id=Hop3>Hop3</th>
+        <th id=ibu3>0</th> 
+        <th id=alpha_acid3>0</th>
+        <th id=utilization3>0</th>
+      </tr>
+    </table>
+
+  </div>
+</div>

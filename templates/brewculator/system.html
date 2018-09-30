@@ -1,0 +1,22 @@
+<div style='border-style: solid;'>
+  
+  <h3>System</h3>
+  
+  {% for column in system_columns %}
+    <div style='display: block;'>
+        <label style='display: block;'>{{ column }}</label>
+
+        {% if column == 'batch_size' %}
+        <input type=text class=system_input size=10 name={{ column }} value=5>
+        
+        {% elif column == 'extraction_efficiency' %}
+        <input type=text class=system_input size=10 name={{ column }} value=73.5>
+
+        {% endif %}
+
+        
+    </div>  
+
+    {% endfor %}
+  
+</div>

@@ -1,0 +1,45 @@
+<div class='container'>
+  <div class='mash-input-div'>
+    
+    <h3>Mash</h3>
+
+    {% for column in mash_columns %}
+    <div style='display: block;'>
+        <label style='display: block;'>{{ column }}</label>
+
+        {% if column == 'init_grain_temp' %}
+        <input type=text class=mash_input size=10 name={{ column }} value=70>
+        {% elif column == 'sacc_rest_temp' %}
+        <input type=text class=mash_input size=10 name={{ column }} value=150>
+        {% elif column == 'mash_duration' %}      
+        <input type=text class=mash_input size=10 name={{ column }} value=60>
+        {% else %}
+        <input type=text class=mash_input size=10 name={{ column }} value=1.25>
+
+        {% endif %}
+
+        
+    </div>  
+
+    {% endfor %}    
+
+
+  </div>
+
+
+  <div class='mash-app-div'>
+    <h3>Mash Summary</h3>
+    <h3>Mash Volume: <span id=mash_volume>0.000</span></h3>
+    <h3>Infusion Temperature: <span id=infusion_temp>0.000</span></h3>
+    <h3>Mash Out Volume: <span id=mash_out_vol>0.000</span></h3>
+
+    <!-- Chart Code -->
+
+    <div class=mashChartDiv  style='width: 70%;'>
+    <canvas id="mashChart"></canvas>
+    </div>
+
+  </div>
+  
+</div>
+

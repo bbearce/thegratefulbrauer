@@ -1,0 +1,73 @@
+1,Light Lager,Lite American Lager,1.03,1.04,0.998,1.008,8,12,2,3
+2,Light Lager,Standard American Lager,1.04,1.05,1.004,1.01,8,15,2,4
+3,Light Lager,Premium American Lager,1.046,1.056,1.008,1.012,15,25,2,6
+4,Light Lager,Munich Helles,1.045,1.051,1.008,1.012,16,22,3,5
+5,Light Lager,Dortmunder Export,1.048,1.056,1.01,1.015,23,30,4,6
+6,Pilsener,German Pilsner (Pils),1.044,1.05,1.008,1.013,25,45,2,6
+7,Pilsener,Bohemian Pilsener,1.044,1.056,1.013,1.017,35,45,3.5,6
+8,Pilsener,Classic American Pilsner,1.044,1.06,1.01,1.015,25,40,3,6
+9,European Amber Lager,Vienna Lager,1.046,1.052,1.01,1.014,18,30,10,16
+10,European Amber Lager,Oktoberfest/Marzen,1.05,1.056,1.012,1.016,20,28,7,14
+11,Dark Lager,Dark American Lager,1.044,1.056,1.008,1.012,8,20,14,22
+12,Dark Lager,Munich Dunkel,1.048,1.056,1.01,1.016,18,28,14,28
+13,Dark Lager,Schwarzbier (Black Beer),1.046,1.052,1.01,1.016,22,32,17,30
+14,Bock,Maibock/Helles Bock,1.064,1.072,1.011,1.018,23,35,6,11
+15,Bock,Traditional Bock,1.064,1.072,1.013,1.019,20,27,14,22
+16,Bock,Doppelbock,1.072,1.096,1.016,1.024,16,26,6,25
+17,Bock,Eisbock,1.078,1.12,1.02,1.035,23,35,18,30
+18,Light Hybrid Beer,Cream Ale,1.042,1.055,1.006,1.012,15,20,2.5,5
+19,Light Hybrid Beer,Blonde Ale,1.038,1.054,1.008,1.013,15,28,3,6
+20,Light Hybrid Beer,Kolsch,1.044,1.05,1.007,1.011,20,30,3.5,5
+21,Light Hybrid Beer,American Wheat or Rye,1.04,1.055,1.008,1.013,15,30,3,6
+22,Amber Hybrid Beer,Northern German Altbier,1.046,1.054,1.01,1.015,25,40,13,19
+23,Amber Hybrid Beer,California Common Beer,1.048,1.054,1.011,1.014,30,45,10,14
+24,Amber Hybrid Beer,Dusseldorf Altbier,1.046,1.054,1.01,1.015,35,50,13,17
+25,English Pale Ale,Standard/Ordinary Bitter,1.032,1.04,1.007,1.011,25,35,4,14
+26,English Pale Ale,Special/Best/Premium Bitter,1.04,1.048,1.008,1.012,25,40,5,16
+27,English Pale Ale,Extra Special/Strong Bitter,1.048,1.06,1.01,1.016,30,50,6,18
+28,Scottish and Irish Ale,Scottish Light 60/-,1.03,1.035,1.01,1.013,10,20,9,17
+29,Scottish and Irish Ale,Scottish Heavy 70/-,1.035,1.04,1.01,1.015,10,25,9,17
+30,Scottish and Irish Ale,Scottish Export 80/-,1.04,1.054,1.01,1.016,15,30,9,17
+31,Scottish and Irish Ale,Irish Red Ale,1.044,1.06,1.01,1.014,17,28,9,18
+32,Scottish and Irish Ale,Strong Scotch Ale,1.07,1.03,1.018,1.03,17,35,14,25
+33,American Ale,American Pale Ale,1.045,1.06,1.01,1.015,30,45,5,14
+34,American Ale,American Amber Ale,1.045,1.06,1.01,1.015,25,40,10,17
+35,American Ale,American Brown Ale,1.045,1.06,1.01,1.016,20,40,18,35
+36,English Brown Ale,Mild,1.03,1.038,1.008,1.013,10,25,12,25
+37,English Brown Ale,Southern English Brown,1.035,1.042,1.011,1.014,12,20,19,35
+38,English Brown Ale,Northern English Brown,1.04,1.052,1.008,1.013,20,30,12,22
+39,Porter,Brown Porter,1.04,1.052,1.008,1.014,18,35,20,30
+40,Porter,Robust Porter,1.048,1.065,1.012,1.016,25,50,22,35
+41,Porter,Baltic Porter,1.06,1.09,1.016,1.024,20,40,17,30
+42,Stout,Dry Stout,1.036,1.05,1.007,1.011,30,45,25,40
+43,Stout,Sweet Stout,1.042,1.056,1.01,1.023,25,40,30,40
+44,Stout,Oatmeal Stout,1.048,1.065,1.01,1.018,25,40,22,40
+45,Stout,Foreign Extra Stout,1.056,1.075,1.01,1.018,30,70,30,40
+46,Stout,American Stout,1.05,1.075,1.01,1.022,35,75,30,40
+47,Stout,Russian Imperial Stout,1.075,1.095,1.018,1.03,50,90,30,40
+48,Indian Pale Ale (IPA),English IPA,1.05,1.075,1.01,1.018,40,60,8,14
+49,Indian Pale Ale (IPA),American IPA,1.056,1.075,1.01,1.018,40,60,6,15
+50,Indian Pale Ale (IPA),Imperial IPA,1.075,1.09,1.012,1.02,60,100,8,15
+51,German Wheat and Rye Beer,Weizen/Weissbier,1.044,1.052,1.01,1.014,28,15,2,8
+52,German Wheat and Rye Beer,Dunkelweizen,1.044,1.056,1.01,1.014,10,18,14,23
+53,German Wheat and Rye Beer,Weizenbock,1.064,1.08,1.015,1.022,15,30,12,25
+54,German Wheat and Rye Beer,Roggenbier (German Rye),1.046,1.056,1.01,1.014,10,20,14,19
+55,Belgian and French Ale,Witbier,1.044,1.052,1.008,1.012,10,20,2,4
+56,Belgian and French Ale,Belgian Pale Ale,1.048,1.054,1.01,1.014,20,30,8,14
+57,Belgian and French Ale,Saison,1.048,1.08,1.01,1.016,25,45,5,12
+58,Belgian and French Ale,Biere de Garde,1.06,1.08,1.012,1.018,20,30,6,19
+59,Sour Ale,Berliner Weisse,1.028,1.032,1.004,1.006,3,-8,2,3
+60,Sour Ale,Flanders Red Ale,1.046,1.054,1.008,1.016,15,25,10,16
+61,Sour Ale,Flanders Brown/Oud Bruin,1.043,1.077,1.012,1.016,15,25,15,20
+62,Sour Ale,Straight (Unblended) Lambic,1.04,1.054,1,1.01,0,10,3,7
+63,Sour Ale,Gueuze,1.04,1.06,1,1.006,0,10,3,7
+64,Sour Ale,Fruit Lambic,1.04,1.06,1,1.01,0,10,3,7
+65,Belgian Strong Ale,Belgian Blonde Ale,1.062,1.075,1.008,1.016,20,30,4,6
+66,Belgian Strong Ale,Belgian Dubbel,1.062,1.075,1.01,1.018,15,25,10,14
+67,Belgian Strong Ale,Belgian Tripel,1.075,1.085,1.01,1.016,25,38,4.5,6
+68,Belgian Strong Ale,Belgian Golden Strong Ale,1.07,1.095,1.01,1.016,25,35,4,6
+69,Belgian Strong Ale,Belgian Dark Strong Ale,1.075,1.11,1.01,1.024,15,25,15,20
+70,Strong Ale,Old Ale,1.06,1.09,1.015,1.022,30,60,10,22
+71,Strong Ale,English Barleywine,1.08,1.12,1.018,1.03,35,70,8,22
+72,Strong Ale,American Barleywine,1.08,1.12,1.016,1.03,50,120,10,19
+73,Smoke-Flavored/Wood-Aged Beer,Classic Rauchbier,1.05,1.056,1.012,1.016,20,30,14,22

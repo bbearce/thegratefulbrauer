@@ -1,0 +1,54 @@
+
+<div class='container'>
+  <div class='fermentables-input-div'>
+    
+    <h3>Fermentables</h3>
+
+    {% for column_set in fermentables_columns %}
+      
+      <div style='display: block;'>
+        <div style='display: inline-block;'>
+          <label style='display: block;'>{{ column_set[0][0]|capitalize }}{{ column_set[0][1] }}</label>
+
+          <!-- Testing inputs -->
+          <select  name='{{ column_set[0][0] }}{{ column_set[0][1] }}'>      
+              {% for ingredient in Fermentables %}
+                  <option> {{ ingredient.ingredients }}</option>  
+              {% endfor %}
+
+          </select>
+
+        </div>
+      
+        <div style='display: inline-block;'>
+          <label style='display: block;'>{{ column_set[1][0]|capitalize }}{{ column_set[1][1] }}</label>
+          <input type=text
+                 class=fermentables_weight
+                 size=10 
+                 name='{{ column_set[1][0] }}{{ column_set[1][1] }}'
+                 value=0>
+        </div>
+      </div>
+
+
+    {% endfor %}
+
+
+  </div>
+
+  <div class='fermentables-app-div'>
+    <h3>Fermentables Summary</h3>
+
+    <h3>OG: <span id=OG>1.000</span></h3>
+
+    <!-- Chart Code -->
+
+    <div class=fermentablesChartDiv  style='width: 70%;'>
+    <canvas id="fermentablesChart"></canvas>
+    </div>
+
+
+
+  </div>
+
+</div>

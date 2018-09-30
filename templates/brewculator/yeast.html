@@ -1,0 +1,68 @@
+<div class='container'>
+  <div class='yeast-input-div'>
+    
+    <h3>Yeast</h3>
+
+    <div style='display: block;'>
+    {% for column in yeast_columns %}
+
+        {% if column == 'yeast_name' %}
+            <div style='display: iblock;'>
+                <label style='display: block;'>{{ column|capitalize }}</label>
+                <select name='{{ column }}'>      
+                    {% for ingredient in Yeast %}
+                        <option> {{ ingredient.yeastStrain }}</option>  
+                    {% endfor %}
+                </select>
+            </div>
+        {% else %}
+            <div style='display: block;'>
+                <label style='display: block;'>{{ column|capitalize }}</label>
+                <input class = "display: inline-block;" type=text size=10 name={{ column }} value=0><span>Billions Used (Doesn't affect alcohol content)</span>
+            </div>
+        {% endif %}
+
+
+    {% endfor %}
+    </div>
+    
+
+      
+
+  </div>
+
+  <div class='yeast-app-div'>
+    
+    <h3>Yeast Summary</h3>
+
+    <h3>ABV: <span id=abv>0.000</span></h3>
+    <h3>OG: <span id=og>0.000</span></h3>
+    <h3>FG: <span id=fg>0.000</span></h3>
+
+    <h3>Yeast Stats</h3>
+
+       <table>
+      <tr>
+        <th>Yeast</th>
+        <th>Attenuation</th> 
+        <th>Recommended Cells to Pitch</th>
+      </tr>
+      <tr>
+        <th id=Yeast>Default</th>
+        <th id=Attenuation>0</th> 
+        <th id=Pitch_Rate_Recommended>0</th>
+
+      </tr>
+      
+    </table>
+
+    <!-- Chart Code -->
+
+    <div class=yeastChartDiv  style='width: 70%;'>
+    <canvas id="yeastChart"></canvas>
+    </div>
+
+
+  </div>
+
+</div>

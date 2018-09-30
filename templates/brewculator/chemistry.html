@@ -1,0 +1,222 @@
+<div class='container'>
+  <div class='chemistry-input-div'>
+    
+    <h3>Chemistry</h3>
+    <h4>Below enter in your cities initial ion concetrations in the water supply:</h4>
+    <!-- Initial Ion Concentrations -->
+    <table>
+      <tr>
+        <th>Ca</th>
+        <th>Mg</th> 
+        <th>Na</th>
+        <th>Cl</th>
+        <th>SO<sub>4</sub></th>
+        <th>HCO<sub>3</sub> or CaCO<sub>3</sub></th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type=number name=init_Ca value=4></td>
+        <td><input class = chemistry_inputs type=number name=init_Mg value=1></td>
+        <td><input class = chemistry_inputs type=number name=init_Na value=32></td>
+        <td><input class = chemistry_inputs type=number name=init_Cl value=27></td>
+        <td><input class = chemistry_inputs type=number name=init_SO4 value=6></td>
+        <td><input class = chemistry_inputs type=number name=init_HCO3_CaCO3 value=40></td>
+      </tr>
+    </table>
+
+    <h4>Here are the current mash and sparge volumes for your recipe:</h4>
+
+    <!-- Display Mash Volume and Sparge Volume -->
+    <table>
+      <tr>
+        <th>Mash Vol (Gal)</th>
+        <th>Sparge Vol (Gal)</th>
+      </tr>
+      <tr>
+        <td id=mash_volume_for_chemistry>0</td>
+        <td id=sparge_volume_for_chemistry>0</td>
+      </tr>
+    </table>
+
+    <br>
+
+    <h4>If either the mash or sparge volume contains distilled water, enter below:</h4>
+    <!-- % Distilled for both mash and sparge volume -->
+    <table>
+      <tr>
+        <th>% Distilled (M)</th>
+        <th>% Distilled (S)</th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type="number" name="mash_distilled_percent" value=0></td>
+        <td><input class = chemistry_inputs type="number" name="sparge_distilled_percent" value=0></td>
+      </tr>
+    </table>
+
+    <h4>Special Adjustments:</h4>
+    <h4>If you have any acidulated malt or lactic acid in this brew, enter the amounts below.</h4>
+
+    <table>
+      <tr>
+        <th>Acidulated Malt (%)</th>
+        <th>Lactic Acid (%)</th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type="number" name="acidulated_malt_percent" value="2"></td>
+        <td><input class = chemistry_inputs type="number" name="lactic_acid_percent" value="88"></td>
+      </tr>
+      <tr>
+        <th>Acidulated Malt (oz)</th>
+        <th>Lactic Acid (ml)</th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type="number" name="acidulated_malt_oz" value="0"></td>
+        <td><input class = chemistry_inputs type="number" name="lactic_acid_ml" value="0"></td>
+      </tr>
+    </table>
+
+    <!-- Adjust Mash pH Down -->
+    <h4>Adjust Mash pH Down</h4>
+    <table>
+      <tr>
+        <th>Gypsum CaSO<sub>4</sub></th>
+        <th>Cal. Chl CaCl<sub>2</sub></th>
+        <th>Epsom Salt MgSO<sub>4</sub></th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type=number size=10 name=mash_ph_down_gypsum_CaSO4 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=mash_ph_down_cal_chl_CaCl2 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=mash_ph_down_epsom_salt_MgSO4 value=0></td>
+      </tr>
+    </table>
+
+    <!-- Adjust Mash pH Up -->
+    <h4>Adjust Mash pH Up</h4>
+    <table>
+      <tr>
+        <th>Slaked Lime Ca(OH)<sup>2</sup></th>
+        <th>Baking Soda NaHCO<sub>3</sub></th>
+        <th>Chalk CaCO<sub>3</sub></th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type=number size=10 name=mash_ph_up_slaked_lime_CaOH2 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=mash_ph_up_baking_soda_NaHCO3 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=mash_ph_up_chalk_CaCO3 value=0></td>
+      </tr>
+    </table>
+
+    <!-- Adjust Sparge pH Down -->
+    <h4>Adjust Sparge pH Down</h4>
+    <table>
+      <tr>
+        <th>Gypsum CaSO<sub>4</sub></th>
+        <th>Cal. Chl CaCl<sub>2</sub></th>
+        <th>Epsom Salt MgSO<sub>4</sub></th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type=number size=10 name=sparge_ph_down_gypsum_CaSO4 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=sparge_ph_down_cal_chl_CaCl2 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=sparge_ph_down_epsom_salt_MgSO4 value=0></td>
+      </tr>
+    </table>
+
+    <!-- Adjust Sparge pH Up -->
+    <h4>Adjust Sparge pH Up</h4>
+    <table>
+      <tr>
+        <th>Slaked Lime Ca(OH)<sup>2</sup></th>
+        <th>Baking Soda NaHCO<sub>3</sub></th>
+        <th>Chalk CaCO<sub>3</sub></th>
+      </tr>
+      <tr>
+        <td><input class = chemistry_inputs type=number size=10 name=sparge_ph_up_slaked_lime_CaOH2 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=sparge_ph_up_baking_soda_NaHCO3 value=0></td>
+        <td><input class = chemistry_inputs type=number size=10 name=sparge_ph_up_chalk_CaCO3 value=0></td>
+      </tr>
+    </table>
+
+    </div>
+
+    <div class='chemistry-app-div'>
+        <h3>Chemistry Summary</h3>
+        <h4>The goal here is to make the mash happen at a pH that is optimal for the enzymes to convert the grain starches to sugars.</h4>
+        <h4>Desired mash pH is between 5.4 - 5.6</h4>
+        <!-- Mash pH Table -->
+        <table>
+          <tr>
+            <th>Mash pH</th>
+            <th>Effective Alkalinity</th>
+            <th>Residual Alkalinity</th>
+          </tr>
+          <tr>
+            <td id="estimated_ph">0</td>
+            <td id="effective_alkalinity">0</td>
+            <td id="residual_alkalinity">0</td>
+          </tr>
+        </table>
+
+        <h4>Resulting Water Profile (Mash + Sparge Vol)</h4>
+
+        <table>
+          <tr>
+            <th>Ca (Mash)</th>
+            <th>Mg (Mash)</th> 
+            <th>Na (Mash)</th>
+            <th>Cl (Mash)</th>
+            <th>SO<sub>4</sub> (Mash)</th>
+          </tr>
+          <tr>
+            <td id="mash_Ca">0</td>
+            <td id="mash_Mg">0</td>
+            <td id="mash_Na">0</td>
+            <td id="mash_Cl">0</td>
+            <td id="mash_SO4">0</td>
+          </tr>
+          <tr>
+            <th>Ca (M + S)</th>
+            <th>Mg (M + S)</th> 
+            <th>Na (M + S)</th>
+            <th>Cl (M + S)</th>
+            <th>SO<sub>4</sub> (M + S)</th>
+          </tr>
+          <tr>
+            <td id="mash_sparge_Ca">0</td>
+            <td id="mash_sparge_Mg">0</td>
+            <td id="mash_sparge_Na">0</td>
+            <td id="mash_sparge_Cl">0</td>
+            <td id="mash_sparge_SO4">0</td>
+          </tr>
+        </table>
+
+        <h4>Ratio of Cl/SO<sub>4</sub></h4>
+        <label>Mash Cl/SO<sub>4</sub></label>
+        <br>
+        <p id="mash_Cl_SO4" style="display: inline-block; border-style: solid; width: 10%;">0</p><span> (Below .77, May enhance bitterness)</span>
+        <br>
+        <label>Mash + Sparge Cl/SO<sub>4</sub></label>
+        <br>
+        <p id="mash_sparge_Cl_SO4" style="display: inline-block; border-style: solid; width: 10%;">0</p><span> (Below .77, May enhance bitterness)</span>
+
+        <h4>Recommended Ranges for Water Profile</h4>
+
+        <table>
+          <tr>
+            <th>Ca</th>
+            <th>Mg</th> 
+            <th>Na</th>
+            <th>Cl</th>
+            <th>SO<sub>4</sub></th>
+          </tr>
+          <tr>
+            <td>50-100</td>
+            <td>10-30</td>
+            <td>0-150</td>
+            <td>0-250</td>
+            <td>50-350</td>
+          </tr>
+        </table>
+
+
+
+    </div>
+
+</div>
