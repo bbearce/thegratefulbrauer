@@ -447,7 +447,6 @@ def brewculator():
     data['Constants']['gb_constants_ut'] = ut_list
 
 
-
     # Dynamic Control for Fermentables Inputs
     num_of_inputs = 5
     fcolumns = [zip(fermentables_columns,[i]*(len(fermentables_columns)+1)) for i in range(1,num_of_inputs+1)]
@@ -477,6 +476,6 @@ def brewculator():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 33507))
-    #manager.run()
-    app.run(host='0.0.0.0', port=port)
+    manager.run()
+    #app.run(host='0.0.0.0', port=port)
 
