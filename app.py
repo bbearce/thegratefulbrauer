@@ -79,54 +79,58 @@ def load():
         for r in recipe_columns:
             recipe_dict[r] = getattr(Recipe, r)
 
-        system_dict = {}
-        for s in system_columns:
-            system_dict[s] = getattr(System, s)        
+        exec("""
+system_dict = {}
+for s in system_columns:
+    system_dict[s] = getattr(System, s)       
 
-        fermentables_list = []
-        for F in Fermentables:
-            fermentables_dict = {}
-            for f in fermentables_columns:
-                fermentables_dict[f] = getattr(F, f)
-            fermentables_list.append(fermentables_dict)
 
-        hops_list = []
-        for H in Hops:
-            hops_dict = {}
-            for h in hops_columns:
-                hops_dict[h] = getattr(H, h)
-            hops_list.append(hops_dict)
 
-        mash_dict = {}
-        for m in mash_columns:
-            mash_dict[m] = getattr(Mash, m)
 
-        yeast_dict = {}
-        for y in yeast_columns:
-            yeast_dict[y] = getattr(Yeast, y)
+fermentables_list = []
+for F in Fermentables:
+    fermentables_dict = {}
+    for f in fermentables_columns:
+        fermentables_dict[f] = getattr(F, f)
+    fermentables_list.append(fermentables_dict)
 
-        water_dict = {}
-        for w in water_columns:
-            water_dict[w] = getattr(Water, w)
+hops_list = []
+for H in Hops:
+    hops_dict = {}
+    for h in hops_columns:
+        hops_dict[h] = getattr(H, h)
+    hops_list.append(hops_dict)
 
-        fermentation_dict = {}
-        for f in fermentation_columns:
-            fermentation_dict[f] = getattr(Fermentation, f)
+mash_dict = {}
+for m in mash_columns:
+    mash_dict[m] = getattr(Mash, m)
 
-        chemistry_dict = {}
-        for c in chemistry_columns:
-            chemistry_dict[c] = getattr(Chemistry, c)
+yeast_dict = {}
+for y in yeast_columns:
+    yeast_dict[y] = getattr(Yeast, y)
 
-        data['Recipe']['gb_recipe_master'] = recipe_dict
-        data['Recipe']['gb_recipe_system'] = system_dict
-        data['Recipe']['gb_recipe_fermentables'] = fermentables_list
-        data['Recipe']['gb_recipe_hops'] = hops_list
-        data['Recipe']['gb_recipe_mash'] = mash_dict
-        data['Recipe']['gb_recipe_yeast'] = yeast_dict
-        data['Recipe']['gb_recipe_water'] = water_dict
-        data['Recipe']['gb_recipe_fermentation'] = fermentation_dict
-        data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
+water_dict = {}
+for w in water_columns:
+    water_dict[w] = getattr(Water, w)
 
+fermentation_dict = {}
+for f in fermentation_columns:
+    fermentation_dict[f] = getattr(Fermentation, f)
+
+chemistry_dict = {}
+for c in chemistry_columns:
+    chemistry_dict[c] = getattr(Chemistry, c)
+
+data['Recipe']['gb_recipe_master'] = recipe_dict
+data['Recipe']['gb_recipe_system'] = system_dict
+data['Recipe']['gb_recipe_fermentables'] = fermentables_list
+data['Recipe']['gb_recipe_hops'] = hops_list
+data['Recipe']['gb_recipe_mash'] = mash_dict
+data['Recipe']['gb_recipe_yeast'] = yeast_dict
+data['Recipe']['gb_recipe_water'] = water_dict
+data['Recipe']['gb_recipe_fermentation'] = fermentation_dict
+data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
+            """)
 
         return jsonify(data=data)
 
@@ -255,94 +259,6 @@ def save():
 
     else:
         recipe = "that recipe already exists"
-
-
-    # try:
-    #     # If id exists and this doesn't fail, we have a duplicate and we need to just send a message.
-    #     pdb.set_trace()
-    #     models.Recipe.query.filter_by(recipe=Recipe.recipe).all()[-1].id
-    #     recipe = "that recipe already exists"
-
-    # except IndexError as error:
-    #     print("this recipe doesn't exist so we are adding it.")
-
-    #     db.session.add(Recipe)
-    #     db.session.commit()
-
-    #     # System
-    #     system_string = "System = models.Recipe_System(recipe_id=Recipe.id,"
-    #     for s in system_columns:
-    #         system_string = system_string + " {}={},".format(s,s)
-
-    #     system_string = system_string + ")"; exec(system_string)
-    #     # Fermentables
-    #     g = globals()
-    #     l = locals()
-    #     num_of_ingredients = 5
-    #     for i in range(0,num_of_ingredients):
-    #         fermentables_string = "Fermentables{} = models.Recipe_Fermentables(recipe_id=Recipe.id,".format(i+1)
-    #         for fermentables in fermentables_columns:
-    #             fermentables_string = fermentables_string + " {}={}{},".format(fermentables,fermentables,i+1)
-    #         fermentables_string = fermentables_string + ")";
-    #         print(fermentables_string)
-    #         exec(fermentables_string, g, l)
-    #     # Fermentables1 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient1, weight_lbs=weight_lbs1,)
-    #     # Fermentables2 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient2, weight_lbs=weight_lbs2,)
-    #     # Fermentables3 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient3, weight_lbs=weight_lbs3,)
-    #     # Fermentables4 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient4, weight_lbs=weight_lbs4,)
-    #     # Fermentables5 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient5, weight_lbs=weight_lbs5,)
-    #     # Hops
-    #     num_of_ingredients = 3
-    #     for i in range(0,num_of_ingredients):
-    #         hops_string = "Hops{} = models.Recipe_Hops(recipe_id=Recipe.id,".format(i+1)
-    #         for hops in hops_columns:
-    #             hops_string = hops_string + " {}={}{},".format(hops,hops,i+1)
-    #         hops_string = hops_string + ")"
-    #         exec(hops_string, g, l)
-    #     # Hops1 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop1, weight_oz=weight_oz1, boil_time_min=boil_time_min1,)
-    #     # Hops2 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop2, weight_oz=weight_oz2, boil_time_min=boil_time_min2,)
-    #     # Hops3 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop3, weight_oz=weight_oz3, boil_time_min=boil_time_min3,)
-
-    #     # Mash
-    #     mash_string = "Mash = models.Recipe_Mash(recipe_id=Recipe.id,"
-    #     for m in mash_columns:
-    #         mash_string = mash_string + " {}={},".format(m,m)
-
-    #     mash_string = mash_string + ")"; exec(mash_string, g, l)
-        
-    #     # Yeast
-    #     yeast_string = "Yeast = models.Recipe_Yeast(recipe_id=Recipe.id,"
-    #     for y in yeast_columns:
-    #         yeast_string = yeast_string + " {}={},".format(y,y)
-
-    #     yeast_string = yeast_string + ")"; exec(yeast_string, g, l)
-
-    #     # Water
-    #     water_string = "Water = models.Recipe_Water(recipe_id=Recipe.id,"
-    #     for w in water_columns:
-    #         water_string = water_string + " {}={},".format(w,w)
-
-    #     water_string = water_string + ")"; exec(water_string, g, l)        
-
-    #     # Fermentation
-    #     fermentation_string = "Fermentation = models.Recipe_Fermentation(recipe_id=Recipe.id,"
-    #     for fermentation in fermentation_columns:
-    #         fermentation_string = fermentation_string + " {}={},".format(fermentation,fermentation)
-
-    #     fermentation_string = fermentation_string + ")"; exec(fermentation_string), g, l
-
-    #     # Chemistry
-    #     chemistry_string = "Chemistry = models.Recipe_Chemistry(recipe_id=Recipe.id,"
-    #     for c in chemistry_columns:
-    #         chemistry_string = chemistry_string + " {}={},".format(c,c)
-
-    #     chemistry_string = chemistry_string + ")"; exec(chemistry_string, g, l)
-    #     pdb.set_trace()
-    #     Fermentables = [Fermentables1, Fermentables2, Fermentables3, Fermentables4, Fermentables5]
-    #     Hops = [Hops1, Hops2, Hops3]
-        
-    #     db.session.add_all(Fermentables + Hops + [Mash, Water, Fermentation, Yeast, Chemistry, System])
-    #     db.session.commit()
    
     return jsonify(recipe=recipe)
 
