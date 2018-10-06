@@ -8,86 +8,106 @@
     display: block;
 }*/
 /* input divs */
-.input-div{
-    border-style: solid; 
+.system-input-div{
     float: left;
-    height: 600px;
+    height: 200px;
     width: 33%;
 }
 
 .fermentables-input-div{
-    border-style: solid; 
     float: left;
-    height: 500px;
+    height: 700px;
     width: 33%;
 }
 
 .hops-input-div{
-    border-style: solid; 
     float: left;
     height: 700px;
     width: 33%;
 }
 
 .mash-input-div{
-    border-style: solid; 
     float: left;
     height: 600px;
     width: 33%;
 }
 
 .yeast-input-div{
-    border-style: solid; 
+    float: left;
+    height: 700px;
+  
+}
+
+.water-input-div{
+    float: left;
+    height: 700px;
+    width: 33%;
+}
+
+.fermentation-input-div{
     float: left;
     height: 700px;
     width: 33%;
 }
 
 .chemistry-input-div{
-    border-style: solid; 
     float: left;
     height: 1500px;
     width: 33%;
 }
 
 /* app divs */
-.app-div{
-    border-style: solid; 
+.system-app-div{
+    border-left: solid; 
     float: right;
     width: 65%;
-    height: 600px;
+    height: 200px;
 }
 
 .fermentables-app-div{
-    border-style: solid; 
+    border-left: solid; 
     float: right;
     width: 65%;
-    height: 500px;
+    height: 700px;
 }
 
 .hops-app-div{
-    border-style: solid; 
+    border-left: solid; 
     float: right;
     width: 65%;
     height: 700px;
 }
 
 .mash-app-div{
-    border-style: solid; 
+    border-left: solid; 
     float: right;
     width: 65%;
     height: 600px;
 }
 
 .yeast-app-div{
-    border-style: solid; 
+    border-left: solid; 
+    float: right;
+    width: 65%;
+    height: 700px;
+}
+
+.water-app-div{
+    border-left: solid; 
+    float: right;
+    width: 65%;
+    height: 700px;
+}
+
+.fermentation-app-div{
+    border-left: solid; 
     float: right;
     width: 65%;
     height: 700px;
 }
 
 .chemistry-app-div{
-    border-style: solid; 
+    border-left: solid; 
     float: right;
     width: 65%;
     height: 1500px;
@@ -117,6 +137,9 @@ select {
 
 input {
     text-align: center;
+}
+select {
+    width: 100px;
 }
 
 /* End Input Styles */

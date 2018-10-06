@@ -53,27 +53,9 @@
 
 
 <!-- Tabs -->
-<script type="text/javascript">
-    function openTab(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-</script>
-
-<br><br>
 
 <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'System_Tab')">System</button>
+    <button id="System_Tab_Button" class="tablinks" onclick="openTab(event, 'System_Tab')">System</button>
     <button class="tablinks" onclick="openTab(event, 'Fermentables_Tab')">Fermentables</button>
     <button class="tablinks" onclick="openTab(event, 'Hops_Tab')">Hops</button>
     <button class="tablinks" onclick="openTab(event, 'Mash_Tab')">Mash</button>
@@ -83,7 +65,6 @@
     <button class="tablinks" onclick="openTab(event, 'Chemistry_Tab')">Chemistry</button>
     
 </div>
-
 
 <div id="System_Tab" class="tabcontent">
     <!-- System Section -->
@@ -125,6 +106,26 @@
     {% include '/brewculator/chemistry.html' %}
 </div>
 
+<script type="text/javascript">
+    // Initialize System Tab
+    document.getElementById('System_Tab').style.display = "block";
+    document.getElementById('System_Tab_Button').className += " active";
+
+    function openTab(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+</script>
 
 <!-- End Tabs -->
 
