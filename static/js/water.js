@@ -18,7 +18,7 @@ function get_water_info(){
     // total_grains = calc_percent_of_total()
     // mash_volume = total*(mash_thickness/4) // Convert to [Gal] for mash_thickness
     // infusion_temp = (0.2/mash_thickness)*(sacc_rest_temp-init_grain_temp)+sacc_rest_temp
-    // mash_out_volume = ( (170 - sacc_rest_temp)*(0.2*total_grains+mash_volume) ) / (212 - 170)
+    // mash_out_volume = ((0.2*total_grains)+(mash_volume_qts))*(((mash_protein_rest_temp-sacc_rest_temp)/(210-mash_protein_rest_temp))/4)
 
     // [1] Pre-Boil Volume
 
@@ -65,7 +65,7 @@ function make_water_chart (){
     var myWaterChart = new Chart(ctx,{
       "type":"doughnut",
       "data":{"labels":["Mash Vol","Sparge Vol","Mash Out Vol"],
-              "datasets":[{"label":"My First Dataset","data":[mash_volume,SV,mash_out_volume],
+              "datasets":[{"label":"My First Dataset","data":[mash_volume,SVPMO,mash_out_volume],
                            "backgroundColor":["rgb(255, 99, 132)",
                                               "rgb(54, 162, 235)",
                                               "rgb(255, 205, 86)"]}]

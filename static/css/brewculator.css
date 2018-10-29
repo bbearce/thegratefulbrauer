@@ -128,7 +128,7 @@ select {
     appearance: none;       /* remove default arrow */
     background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;   /* add custom arrow */
     height: 34px;
-    width: 250px;
+    width: 500px; /* Currently overridden below */
 }
 
 /* End Select Styles */
@@ -139,7 +139,7 @@ input {
     text-align: center;
 }
 select {
-    width: 100px;
+    width: 200px;
 }
 
 /* End Input Styles */
@@ -187,7 +187,17 @@ body {font-family: Arial;}
 /* Style the buttons inside the tab */
 .tab button {
     background-color: inherit;
+    
+    /* large screen settings */
     float: left;
+
+    /* mobile settings */ 
+/*    display: block;
+    margin: auto; center button text for mobile
+    width: 100%; /*spread button across screen
+    */
+
+
     border: none;
     outline: none;
     cursor: pointer;

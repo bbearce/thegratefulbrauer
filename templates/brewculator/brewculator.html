@@ -36,26 +36,12 @@
 
 </script>
 
-
-<label style='display: inline-block;'>Recipe</label>
-<input type=text size=5 name=recipe value=initial>
-<label style='display: inline-block;'>Styles</label>
-<select name='style'>      
-    {% for style in Styles %}
-    <option> {{ style.styles }}</option>  
-    {% endfor %}
-</select>
-<br>
-<input id=load type="button" value="Load">
-<input id=save type="button" value="Save"> 
-<input id=delete type="button" value="Delete"> 
-
-
-
 <!-- Tabs -->
 
 <div class="tab">
-    <button id="System_Tab_Button" class="tablinks" onclick="openTab(event, 'System_Tab')">System</button>
+    <!-- System Tab Button ID is for setting the default tab selected -->
+    <button id="Home_Tab_Button" class="tablinks" onclick="openTab(event, 'Home_Tab')">Home</button>
+    <button class="tablinks" onclick="openTab(event, 'System_Tab')">System</button>
     <button class="tablinks" onclick="openTab(event, 'Fermentables_Tab')">Fermentables</button>
     <button class="tablinks" onclick="openTab(event, 'Hops_Tab')">Hops</button>
     <button class="tablinks" onclick="openTab(event, 'Mash_Tab')">Mash</button>
@@ -64,6 +50,26 @@
     <button class="tablinks" onclick="openTab(event, 'Fermentation_Tab')">Fermentation</button>
     <button class="tablinks" onclick="openTab(event, 'Chemistry_Tab')">Chemistry</button>
     
+</div>
+
+<div id="Home_Tab" class="tabcontent">
+    <!-- Home Section -->
+    <div style='display: block;'>
+    <label>Recipe Name</label>
+    <input type=text size=5 name=recipe value=initial>
+    <input id=load type="button" value="Load">
+    <input id=save type="button" value="Save"> 
+    <input id=delete type="button" value="Delete"> 
+    </div>
+
+    <label style='display: block;'>What Style Are You Going For?</label>
+    <select name='style'>      
+        {% for style in Styles %}
+        <option> {{ style.styles }}</option>  
+        {% endfor %}
+    </select>
+
+
 </div>
 
 <div id="System_Tab" class="tabcontent">
@@ -108,8 +114,8 @@
 
 <script type="text/javascript">
     // Initialize System Tab
-    document.getElementById('System_Tab').style.display = "block";
-    document.getElementById('System_Tab_Button').className += " active";
+    document.getElementById('Home_Tab').style.display = "block";
+    document.getElementById('Home_Tab_Button').className += " active";
 
     function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
