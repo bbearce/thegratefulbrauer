@@ -9,11 +9,12 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Authors: BB, KS" />
 
-<meta name="date" content="2014-11-14" />
+<meta name="date" content="2018-10-28" />
 
-<title>Belgian Golden Strong</title>
-
+<title>American IPA</title>
+    
     <!-- Bootstrap Core CSS -->
     <!--<link href="/static/bootstrap.min.css" rel="stylesheet">-->
 
@@ -115,6 +116,7 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+
 <!-- Navigation Bar -->
 {% extends "nav-bar.html" %}
 {% block Content_or_Rmd %}
@@ -122,35 +124,482 @@ $(document).ready(function () {
 
 
 
-
 <div class="fluid-row" id="header">
 
 
 
-<h1 class="title toc-ignore">Belgian Golden Strong</h1>
-<h4 class="author"><em><ul>
-<li>BB; KS -</li>
-</ul></em></h4>
-<h4 class="date"><em>November 14, 2014</em></h4>
+<h1 class="title toc-ignore">American IPA</h1>
+<h4 class="author"><em>Authors: BB, KS</em></h4>
+<h4 class="date"><em>10/28/2018</em></h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#style-summary">Style Summary:</a></li>
+<li><a href="#kitchen-constants">Kitchen Constants:</a><ul>
+<li><a href="#fermentables">Fermentables</a></li>
+<li><a href="#hops">Hops</a></li>
+<li><a href="#mash">Mash</a></li>
+<li><a href="#water-chemistry">Water Chemistry</a></li>
+<li><a href="#yeast">Yeast</a></li>
+<li><a href="#fermentation">Fermentation</a></li>
+</ul></li>
+</ul>
+</div>
 
 <style>
 body {background-color: #FFFFFF;}
 </style>
-<p>MALT</p>
+<div id="style-summary" class="section level1">
+<h1>Style Summary:</h1>
 <ul>
-<li>Target OG = 1.078</li>
-<li>Pilsen - 12 lbs. (83% of OG)</li>
-<li>Candi Syrup 0°L - 2 lbs (17% of OG)</li>
+<li>OG: 1.056 - 1.070</li>
+<li>FG: 1.008 - 1.014</li>
+<li>ABV: 5.5 - 7.5</li>
+<li>IBU: 40 - 70</li>
+<li>SRM: 6 - 14</li>
 </ul>
-<p>HOPS</p>
+<p>More details can be found here: <a href="https://beerrecipes.org/BJCP-2015-Style/65/21a-american-ipa.html">BJCP Style Details</a></p>
+<p>A small excerpt from the source about this style:<br />
+<em>“Overall Impression: A decidedly hoppy and bitter, moderately strong American pale ale, showcasing modern American or New World hop varieties. The balance is hop-forward, with a clean fermentation profile, dryish finish, and clean, supporting malt allowing a creative range of hop character to shine through.”</em> - BJCP -</p>
+</div>
+<div id="kitchen-constants" class="section level1">
+<h1>Kitchen Constants:</h1>
 <ul>
-<li>Target IBU = 26 (BU:GU = 0.33)</li>
-<li>East Kent Goldings (2/3 weight) - 1.5 oz - 60 min</li>
-<li>Saaz (1/3 weight) - 0.75 oz - 20 min</li>
+<li>Evaporation Rate = 15%</li>
+<li>Mash Efficiency = 73.5%<br />
+</li>
+<li>Mash Tun Dead Space = 0 Gallons<br />
+</li>
+<li>Boil Kettle Dead Space = 0.5 Gallons<br />
+</li>
+<li>Lauter Tun Dead Space = 0.5 Gallons<br />
+</li>
+<li>Fermentation Loss = 0.25 Gallons</li>
 </ul>
+<p>* Small Note: <em>we will use math mainly from “Designing Great Beers” by Ray Daniels as it is intuitive and easy to follow for the modern day home brewer.</em></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Recipe</th>
+<th align="left">Style</th>
+<th align="left">Date</th>
+<th align="right">OG</th>
+<th align="right">FG</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Juicy American IPA</td>
+<td align="left">American IPA</td>
+<td align="left">10_28_2018</td>
+<td align="right">1.063</td>
+<td align="right">1.011</td>
+</tr>
+</tbody>
+</table>
+<div id="fermentables" class="section level2">
+<h2>Fermentables</h2>
+<p><a href="http://beersmith.com/Grains/Grains/GrainList.htm">Link to Potential Gravity From Grain Values</a></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Grains</th>
+<th align="right">Lbs</th>
+<th align="right">Potential_SG</th>
+<th align="right">EZ_Water_Code</th>
+<th align="right">SRM</th>
+<th align="right">Percent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Pale Malt (2 Row) US</td>
+<td align="right">12.31</td>
+<td align="right">1.036</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>Theoretical OG from this is:</p>
+<pre class="r"><code># We still need to recreate the static data database
+# For now we will just use raw values I looked up
+
+Ingredient_Gravity = lbs_needed * Gravity_per_lb_malt * Mash Efficiency</code></pre>
+<pre class="r"><code># Don't forget mash efficiency
+fermentables &lt;- fermentables %&gt;% mutate(Ingredient_Gravity = Lbs*(Potential_SG-1)*1000*(mash_eff/100))
+
+# Predicted OG
+predicted_og &lt;- 1+(sum(fermentables$Ingredient_Gravity)/batch_size/1000)
+print(paste(&quot;Predicted OG:&quot;,predicted_og))</code></pre>
+<pre><code>## [1] &quot;Predicted OG: 1.06514452&quot;</code></pre>
+</div>
+<div id="hops" class="section level2">
+<h2>Hops</h2>
+<p>So in the hop profile I want to avoid the resinous part of the hops addition or contribution to flavor. I think it is harsh. In general I want citrusy and fruity hops, but we will boil them to get the bitterness to come through.</p>
+<p>IBU is supposed to be in the range of 40-70. Here are some beers to model ours after:<br />
+* Sierra Nevada Pale Ale: 38 IBU<br />
+* Heady Topper: 75 IBU<br />
+* Dogfish Head 90 min IPA: 90 IBU</p>
+<p>Citra boasts 60-70% of its hop oil volume in mercene which is known for its highly flavorful citrus and fruit flavors and or aromas. We will dry hop post fermentation so the yeast do not interfere with its flavor. Mosaic is also pretty flavorful (48-55% Mercene) and we will use it to bitter the beer. I believe that the isomerization of the hop oils when you boil leaves you with only bitterness flavor. Instead I intend to boil the hops for only 30 minutes. The achieve the correct IBU level, I will just use more hops. I believe that by not being conservative with the hop amount, I will achieve plenty of bitterness, while keeps the integrity of the hop flavors. After reading a bit about boiling hops, I’ve come the the conclusion that most flavor and or aroma is lost after boiling and it would never really matter what hop you used for boiling. Since I’m not trying to make the hoppiest beer in the world and flavor matters, keeping the characteristics of these hops intact is paramount.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Hop</th>
+<th align="left">Hop_Type</th>
+<th align="right">Alpha_Acid_Percent</th>
+<th align="right">Weight_Oz</th>
+<th align="right">Boil_Time</th>
+<th align="right">Utilization</th>
+<th align="right">IBU</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Mozaic</td>
+<td align="left">pellet</td>
+<td align="right">0.1225</td>
+<td align="right">2.00</td>
+<td align="right">30</td>
+<td align="right">0.24</td>
+<td align="right">81.871144</td>
+</tr>
+<tr class="even">
+<td align="left">Citra</td>
+<td align="left">pellet</td>
+<td align="right">0.1250</td>
+<td align="right">0.75</td>
+<td align="right">5</td>
+<td align="right">0.06</td>
+<td align="right">7.832061</td>
+</tr>
+<tr class="odd">
+<td align="left">Citra</td>
+<td align="left">pellet</td>
+<td align="right">0.1250</td>
+<td align="right">0.75</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+<td align="right">0.000000</td>
+</tr>
+</tbody>
+</table>
+<pre><code>## [1] &quot;Total IBU: 89.7032050827974&quot;</code></pre>
+</div>
+<div id="mash" class="section level2">
+<h2>Mash</h2>
+<pre class="r"><code>BS = Batch Size [Gal]
+MV = Mash Volume [Gal]; AW = Addition Water in Mash [Gal]
+VFR = Volume of First Runnings [Gal]
+SV = Sparge Volume [Gal]
+
+TWN = Total Water Needed [Gal]
+PBV = Pre Boil Volume [Gal]
+MOV = Mash Out Volume [Gal]
+SVPMO = Sparge Volume Post Mash Out [Gal]
+
+MTDS = Mash Tun Dead Space [Gal]
+LTDS = Lauter Tun Dead Space [Gal]
+KDS = Kettle Dead Space [Gal]
+FTL = Fermentation Tank Loss [Gal]
+
+GB = Grain Bill [Lbs]
+GA = Grain Absorption [Qts/Lbs]
+WS = Wort Shrinkage [%]
+ER = Evap Rate [%/hr]
+MD = Mash Duration [Min]
+MT = Mash Thickness [Qts/Lbs]
+BT = Boil Time [Min]
+
+ST = Strike Temp [F]
+GT = Grain Temp [F]
+TMT = Target Mash Temp [F]
+IT = Infusion Temp [F]</code></pre>
+<p>Our recipe came out as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Mash_Thickness</th>
+<th align="right">Sacc_Rest_Temp</th>
+<th align="right">Mash_Duration</th>
+<th align="right">Init_Grain_Temp</th>
+<th align="right">Infusion_Temp</th>
+<th align="right">Mash_Volume_Gal</th>
+<th align="right">Sparge_Vol</th>
+<th align="right">Mash_Out_Vol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1.25</td>
+<td align="right">149</td>
+<td align="right">60</td>
+<td align="right">70</td>
+<td align="right">161.64</td>
+<td align="right">3.846875</td>
+<td align="right">3.31823</td>
+<td align="right">2.018693</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="water-chemistry" class="section level2">
+<h2>Water Chemistry</h2>
+<p>Formulas and constants from <a href="http://www.ezwatercalculator.com/">here</a><br />
+Bostons Water Supply Chemistry <a href="https://www.brewersfriend.com/homebrew/water-profiles/">link</a></p>
+<pre class="r"><code>init_Ca &lt;- 4
+init_Mg &lt;- 1
+init_Na &lt;- 32
+init_Cl &lt;- 23
+init_SO4 &lt;- 6
+init_HCO3_CaCO3 &lt;- 40
+
+lactic_acid_percent &lt;- 88 # %
+lactic_acid_ml &lt;- 0
+acidulated_malt_acid_percent &lt;- 2
+acidulated_malt_oz &lt;- 0
+
+ph_down_gypsum_CaSO4 &lt;- 10
+ph_down_Cal_Chl_CaCl2 &lt;- 5
+ph_down_epsom_salt_MgSO4 &lt;- 5
+ph_up_slaked_lime_CaOH2 &lt;- 0
+ph_up_baking_soda_NaHCO3 &lt;- 0
+ph_up_chalk_CaCO3 &lt;- 0
+
+# Post mash additons
+mash_Ca &lt;- init_Ca + 
+          (ph_up_chalk_CaCO3*105.89 +
+           ph_down_gypsum_CaSO4*60 +
+           ph_down_Cal_Chl_CaCl2*72 + 
+           ph_up_slaked_lime_CaOH2*143)/ifelse(MV == 0, 1, MV)
+
+mash_Mg &lt;- init_Mg + 
+          (ph_down_epsom_salt_MgSO4*24.6)/ifelse(MV == 0, 1, MV)
+
+mash_Na &lt;- init_Na + 
+          (ph_up_baking_soda_NaHCO3*72.3)/ifelse(MV == 0, 1, MV)
+
+mash_Cl &lt;- init_Cl + 
+          (ph_down_Cal_Chl_CaCl2*127.47)/ifelse(MV == 0, 1, MV)
+
+mash_SO4 &lt;- init_SO4 + 
+          (ph_down_gypsum_CaSO4*147.4 +
+           ph_down_epsom_salt_MgSO4*103)/ifelse(MV == 0, 1, MV)
+
+# For the distilled water ph look up table
+# 1 - Select Grains
+# 2 - 2-Row
+# 3 - 6-Row
+# 4 - Maris Otter
+# 5 - Munich
+# 6 - Pilsner
+# 7 - Wheat
+# 8 - Vienna
+# 9 - Other
+# 10 - Crystal Malt
+# 11 - Roasted/Toasted
+
+dist_water_ph_look_up_table &lt;- data.frame(EZ_Water_Code = 0:11,
+                                          Distilled_Water_pH = c(0,
+                                                                 0,
+                                                                 5.7,
+                                                                 5.79,
+                                                                 5.77,
+                                                                 5.43,
+                                                                 5.75,
+                                                                 6.04,
+                                                                 5.56,
+                                                                 5.70,
+                                                                 NA,
+                                                                 4.71))
+
+
+fermentables &lt;- left_join(x = fermentables, y = dist_water_ph_look_up_table, by = &quot;EZ_Water_Code&quot;)
+
+# Calculates the distilled water ph from crystal malts which are code 10
+fermentables &lt;- mutate(fermentables, Distilled_Water_pH = ifelse(EZ_Water_Code == 10, 5.22-0.00504*SRM,Distilled_Water_pH))
+
+# Calculating Effective Alkalinity
+if(MV == 0){
+  
+  effective_alkalinity &lt;- 0
+    
+}else{
+
+# There is this radio button for Bicarbonate versus Alkalinity
+# We can't see how it works in the sheet.
+
+ratio = 50/61
+#ratio = 1
+
+effective_alkalinity &lt;- (init_HCO3_CaCO3*ratio+
+  (
+    (ph_up_chalk_CaCO3*130)+
+    (ph_up_baking_soda_NaHCO3*157)-
+    (176.1*lactic_acid_percent/100*lactic_acid_ml*2)-
+    (4160.4*acidulated_malt_acid_percent/100*acidulated_malt_oz)*2.5+
+    (ph_up_slaked_lime_CaOH2)*357
+  )/(ifelse(MV == 0,1,MV)))
+
+}
+  
+# Calculating Residual Alkalinity
+
+if(MV == 0){
+  residual_alkalinity &lt;- 0
+}else{
+  residual_alkalinity &lt;- effective_alkalinity - ((mash_Ca/1.4)+(mash_Mg/1.7))
+            
+}
+
+# Estimated Room-Temp Mash pH
+if(MV == 0){
+  estimated_room_temp_mash_ph &lt;- 0
+}else{
+  estimated_room_temp_mash_ph &lt;- fermentables %&gt;%
+                                 mutate(Lbs_x_distWaterPH = Lbs*Distilled_Water_pH) %&gt;%
+                                 select(Lbs_x_distWaterPH) %&gt;%
+                                 sum()/ifelse(GB == 0, 1, GB) %&gt;%
+                                 as.numeric() + (0.1085*MV/ifelse(GB == 0, 1, GB)+0.013)*residual_alkalinity/50
+}
+
+# Choose to hard code or not.
+# actual_ph &lt;- 5.5
+actual_ph &lt;- estimated_room_temp_mash_ph
+
+chemistry &lt;- data.frame(
+  recipe_id = 1,
+  Init_Ca = init_Ca,
+  Init_Mg = init_Mg,
+  Init_Na = init_Na,
+  Init_Cl = init_Cl,
+  Init_SO4 = init_SO4,
+  Init_HCO3_CaCO3 = init_HCO3_CaCO3,
+  Actual_pH = actual_ph,
+  Effective_Alkalinity = effective_alkalinity,
+  Residual_Alkalinity = residual_alkalinity,
+  pH_DOWN_Gypsum_CaSO4 = ph_down_gypsum_CaSO4,
+  pH_DOWN_Cal_Chl_CaCl2 = ph_down_Cal_Chl_CaCl2,
+  pH_DOWN_Epsom_Salt_MgSO4 = ph_down_epsom_salt_MgSO4,
+  pH_UP_Slaked_Lime_CaOH2 = ph_up_slaked_lime_CaOH2,
+  pH_UP_Baking_Soda_NaHCO3 = ph_up_baking_soda_NaHCO3,
+  pH_UP_Chalk_CaCO3 = ph_up_chalk_CaCO3)
+
+print(paste(&quot;Effective Alkalinity:&quot;, effective_alkalinity))</code></pre>
+<pre><code>## [1] &quot;Effective Alkalinity: 32.7868852459016&quot;</code></pre>
+<pre class="r"><code>print(paste(&quot;Residual Alkalinity:&quot;, residual_alkalinity))</code></pre>
+<pre><code>## [1] &quot;Residual Alkalinity: -167.719023047554&quot;</code></pre>
+<pre class="r"><code>print(paste(&quot;Estimated Room-Temp Mash pH:&quot;, estimated_room_temp_mash_ph))</code></pre>
+<pre><code>## [1] &quot;Estimated Room-Temp Mash pH: 5.54265859150351&quot;</code></pre>
+<pre class="r"><code>print(paste(&quot;Desired Room-Temp Mash pH: 5.4 - 5.6&quot;))</code></pre>
+<pre><code>## [1] &quot;Desired Room-Temp Mash pH: 5.4 - 5.6&quot;</code></pre>
+<pre class="r"><code>kable(chemistry)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">recipe_id</th>
+<th align="right">Init_Ca</th>
+<th align="right">Init_Mg</th>
+<th align="right">Init_Na</th>
+<th align="right">Init_Cl</th>
+<th align="right">Init_SO4</th>
+<th align="right">Init_HCO3_CaCO3</th>
+<th align="right">Actual_pH</th>
+<th align="right">Effective_Alkalinity</th>
+<th align="right">Residual_Alkalinity</th>
+<th align="right">pH_DOWN_Gypsum_CaSO4</th>
+<th align="right">pH_DOWN_Cal_Chl_CaCl2</th>
+<th align="right">pH_DOWN_Epsom_Salt_MgSO4</th>
+<th align="right">pH_UP_Slaked_Lime_CaOH2</th>
+<th align="right">pH_UP_Baking_Soda_NaHCO3</th>
+<th align="right">pH_UP_Chalk_CaCO3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">32</td>
+<td align="right">23</td>
+<td align="right">6</td>
+<td align="right">40</td>
+<td align="right">5.542659</td>
+<td align="right">32.78689</td>
+<td align="right">-167.719</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="yeast" class="section level2">
+<h2>Yeast</h2>
+<pre><code>## [1] &quot;Predicted ABV: 6.12240761426959&quot;</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Yeast_Strain</th>
+<th align="right">Attenuation</th>
+<th align="right">Initial_Cell_Count_Billions</th>
+<th align="right">Pitched_Cells_Billions</th>
+<th align="right">Liters_For_Starter</th>
+<th align="right">Time_For_Starter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">SafAle US-05</td>
+<td align="right">72</td>
+<td align="right">308.215</td>
+<td align="right">308.215</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># Code to solve for starter volume needed
+
+I have some code that will bootleg this calculation and or some rules of thumb for starters...</code></pre>
+</div>
+<div id="fermentation" class="section level2">
+<h2>Fermentation</h2>
+<p>We need to keep the hop character in the beer. This means we need to ferment somewhat cold for an ale or rather on the cold side of the yeast fermentation temperature range. Safale US-05 says 59 - 71.6 degrees fahrenheit. We will shoot for 59. As for any variation. The first week will be tightly controlled. Then we we will put a Kolsch in the fridge and the temp of the beer will probably average out to 70 degrees F for the remaining 3 weeks.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Temp</th>
+<th align="right">Days</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">59</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="right">70</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="right">70</td>
+<td align="right">7</td>
+</tr>
+<tr class="even">
+<td align="right">70</td>
+<td align="right">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
 
@@ -179,7 +628,7 @@ $(document).ready(function () {
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
-
 </body>
 {% endblock %}
+
 </html>
