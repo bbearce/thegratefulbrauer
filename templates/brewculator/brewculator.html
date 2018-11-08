@@ -58,20 +58,33 @@
 <div id="Home_Tab" class="tabcontent">
     <!-- Home Section -->
     <div style='display: block;'>
-    <label>Recipe Name</label>
-    <input type=text size=5 name=recipe value=initial>
-    <input id=load type="button" value="Load">
-    <input id=save type="button" value="Save"> 
-    <input id=delete type="button" value="Delete"> 
+        <div style='display: block;'>
+            <label style='display: block;'>New Recipe Name</label>
+            <input type=text size=25 name=recipe style='text-align: left; ' value=initial>
+            <input id=save type="button" value="Save">             
+        </div>
+
+        <div>
+            <label style='display: block;'>Load Recipe (Doesn't Work Yet)</label>
+            <select name='recipe_load'>  
+                {% for recipe in Recipes %}
+                    <option> {{ recipe.recipe }}</option>  
+                {% endfor %}
+            </select>
+            <input id=load type="button" value="Load">
+        </div>
+
+        <div>
+            <label style='display: block;'>Delete Recipe (Doesn't Work Yet)</label>
+            <select name='recipe_load'>      
+                {% for recipe in Recipes %}
+                    <option> {{ recipe.recipe }}</option>  
+                {% endfor %}
+            </select>
+            <input id=delete type="button" value="Delete"> 
+        </div>
+    
     </div>
-
-    <label style='display: block;'>What Style Are You Going For?</label>
-    <select name='style'>      
-        {% for style in Styles %}
-        <option> {{ style.styles }}</option>  
-        {% endfor %}
-    </select>
-
 
 </div>
 

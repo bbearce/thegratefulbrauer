@@ -2,7 +2,16 @@
   <div class='system-input-div'>
   
   <h3>System</h3>
-  
+
+    <div>
+        <label style='display: block;'>What Style Are You Going For?</label>
+        <select name='style'>      
+            {% for style in Styles %}
+            <option> {{ style.styles }}</option>  
+            {% endfor %}
+        </select>
+    </div>
+
   {% for column in system_columns %}
     <div style='display: block;'>
         <label style='display: block;'>{{ column }}</label>

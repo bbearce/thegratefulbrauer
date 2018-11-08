@@ -85,8 +85,6 @@ for s in system_columns:
     system_dict[s] = getattr(System, s)       
 
 
-
-
 fermentables_list = []
 for F in Fermentables:
     fermentables_dict = {}
@@ -280,14 +278,17 @@ def delete():
     except IndexError as error:
         recipe = "that recipe does not exist"
 
+    # Get updated list of recipes 
+    Recipes = models.Recipe.query.all()
         
-    return jsonify(recipe=recipe)
+    return jsonify(recipe=recipe, Recipes=Recipes)
 
 
 @app.route('/brewculator')
 def brewculator():
 
     # Get fermentables (not recipe values but constants)
+    Recipes = models.Recipe.query.all()
     Styles = models.Styles.query.all()
     Fermentables = models.Fermentables.query.all()
     Hops = models.Hops.query.all()
@@ -363,6 +364,7 @@ def brewculator():
 
     return render_template('/brewculator/brewculator.html',
                            Data = json.dumps(data),
+                           Recipes=Recipes,
                            Styles = Styles,
                            Fermentables = Fermentables,
                            Hops = Hops,
@@ -380,6 +382,6 @@ def brewculator():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 33507))
-    # manager.run()
-    app.run(host='0.0.0.0', port=port)
+    manager.run()
+    #app.run(host='0.0.0.0', port=port)
 
