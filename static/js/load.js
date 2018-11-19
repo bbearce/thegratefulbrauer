@@ -3,7 +3,7 @@ $('#load').bind('click', function() {
 
   // Go to load in python and pass in the recipe input value
   $.getJSON($SCRIPT_ROOT + '/load', {
-    recipe: $('input[name="recipe"]').val(),
+    recipe: $('select[id="recipe_load"]').val()
 
   // the load() function returns a json object with key value pairs
   }, function(data) {
@@ -11,14 +11,12 @@ $('#load').bind('click', function() {
 
     if (data['recipe'] == "that recipe doesn't exist"){
     
+    //*NOTE: Now that things are based on drop downs, this might not ever run...
     // If this recipe doesn't exist in the database then tell the user.
-
-    $('#messages').text("That recipe doesn't exist")
+    alert('That recipe doesn\'t exist')
 
     } else {
     // If this recipe exists in the database then tell the user and load it.
-
-    $('#messages').text("You have loaded recipe "+loaded_data['data']['Recipe']['gb_recipe_master']['recipe'])
 
     // Recipe
     $('select[name="style"]').val(loaded_data['data']['Recipe']['gb_recipe_master']['style'])
@@ -124,6 +122,11 @@ $('#load').bind('click', function() {
     $('input[name="ph_up_baking_soda_NaHCO3"]').val(loaded_data['data']['Recipe']['gb_recipe_chemistry']['ph_up_baking_soda_NaHCO3'])
     $('input[name="ph_up_chalk_CaCO3"]').val(loaded_data['data']['Recipe']['gb_recipe_chemistry']['ph_up_chalk_CaCO3'])
 
+    //Change selected recipe to one just saved
+    document.getElementById("recipe_load").value = loaded_data['data']['Recipe']['gb_recipe_master']['recipe'];
+    document.getElementById("recipe_delete").value = loaded_data['data']['Recipe']['gb_recipe_master']['recipe'];
+    //Send User Message
+    alert("You just loaded "+loaded_data['data']['Recipe']['gb_recipe_master']['recipe'])
 
     //// Rerun app calculations
 

@@ -7,7 +7,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' # Remind yourself why you need this?
-#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://bbearce:Alak3_N3van@localhost/gratefulbrauer"
+#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://bbearce:pass_;)_yeah_right@localhost/gratefulbrauer"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://xjedptgsjqocwi:25dfb7913372da245831b379d76ddb39eaf18eac98eade1b9542bc3ff0936dc4@ec2-23-21-229-48.compute-1.amazonaws.com:5432/d4hvr3omam72o1"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -257,8 +257,11 @@ def save():
 
     else:
         recipe = "that recipe already exists"
-   
-    return jsonify(recipe=recipe)
+        
+    # Get updated list of recipes 
+    Recipes = [recipe.recipe for recipe in models.Recipe.query.all()]
+
+    return jsonify(recipe=recipe, Recipes=Recipes)
 
 
 @app.route('/delete')
@@ -279,7 +282,7 @@ def delete():
         recipe = "that recipe does not exist"
 
     # Get updated list of recipes 
-    Recipes = models.Recipe.query.all()
+    Recipes = [recipe.recipe for recipe in models.Recipe.query.all()]
         
     return jsonify(recipe=recipe, Recipes=Recipes)
 

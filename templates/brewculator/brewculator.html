@@ -60,13 +60,13 @@
     <div style='display: block;'>
         <div style='display: block;'>
             <label style='display: block;'>New Recipe Name</label>
-            <input type=text size=25 name=recipe style='text-align: left; ' value=initial>
+            <input type=text size=25 name=recipe style='text-align: left; ' value='new recipe'>
             <input id=save type="button" value="Save">             
         </div>
 
         <div>
             <label style='display: block;'>Load Recipe (Doesn't Work Yet)</label>
-            <select name='recipe_load'>  
+            <select id='recipe_load'>  
                 {% for recipe in Recipes %}
                     <option> {{ recipe.recipe }}</option>  
                 {% endfor %}
@@ -76,7 +76,7 @@
 
         <div>
             <label style='display: block;'>Delete Recipe (Doesn't Work Yet)</label>
-            <select name='recipe_load'>      
+            <select id='recipe_delete'>      
                 {% for recipe in Recipes %}
                     <option> {{ recipe.recipe }}</option>  
                 {% endfor %}
