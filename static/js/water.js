@@ -64,8 +64,8 @@ function make_water_chart (){
     var ctx = document.getElementById("waterChart")
     var myWaterChart = new Chart(ctx,{
       "type":"doughnut",
-      "data":{"labels":["Mash Vol","Sparge Vol","Mash Out Vol"],
-              "datasets":[{"label":"My First Dataset","data":[mash_volume,SVPMO,mash_out_volume],
+      "data":{"labels":["Mash Vol","Mash Out Vol","Sparge Vol"],
+              "datasets":[{"label":"My First Dataset","data":[mash_volume,mash_out_volume,SVPMO],
                            "backgroundColor":["rgb(255, 99, 132)",
                                               "rgb(54, 162, 235)",
                                               "rgb(255, 205, 86)"]}]
@@ -81,9 +81,9 @@ function refresh_water(){
     
     get_water_info()
 
-    $("#mash_volume_water_duplicate").text(mash_volume)
-    $("#mash_out_vol_duplicate").text(mash_out_volume)
-    $("#sparge_vol").text(SVPMO)
+    $("#mash_volume_water_duplicate").text(mash_volume.toFixed(3))
+    $("#mash_out_vol_duplicate").text(mash_out_volume.toFixed(3))
+    $("#sparge_vol").text(SVPMO.toFixed(3))
 
     make_water_chart()
 

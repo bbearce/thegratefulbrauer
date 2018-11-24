@@ -77,13 +77,13 @@ function refresh_yeast() {
     get_yeast_info()
     calculate_yeast_output()
 
-    $('#abv').text(ABV)
-    $('#OG').text(OG)
-    $('#fg').text(FG)
+    $('#abv').text(ABV.toFixed(1))
+    $('#OG').text(OG.toFixed(3))
+    $('#fg').text(FG.toFixed(3))
 
     $('#Yeast').text(yeast_name)
     $('#Attenuation').text(yeast_properties.attenuation)
-    $('#Pitch_Rate_Recommended').text(RCC/10**9)
+    $('#Pitch_Rate_Recommended').text((RCC/10**9).toFixed(3))
 
     make_yeast_chart()
 

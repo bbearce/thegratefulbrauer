@@ -292,7 +292,7 @@ def brewculator():
 
     # Get fermentables (not recipe values but constants)
     Recipes = models.Recipe.query.all()
-    Styles = models.Styles.query.all()
+    Styles = models.Styles.query.order_by('styles').all()
     Fermentables = models.Fermentables.query.all()
     Hops = models.Hops.query.all()
     Yeast = models.Yeast.query.all()

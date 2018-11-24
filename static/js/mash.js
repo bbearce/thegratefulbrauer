@@ -114,9 +114,9 @@ function refresh_mash(){
     
     get_mash_info()
 
-    $("#mash_volume").text(mash_volume)
-    $("#infusion_temp").text(infusion_temp)
-    $("#mash_out_vol").text(mash_out_volume)
+    $("#mash_volume").text(mash_volume.toFixed(3))
+    $("#infusion_temp").text(infusion_temp.toFixed(3))
+    $("#mash_out_vol").text(mash_out_volume.toFixed(3))
 
     make_mash_chart()
 }

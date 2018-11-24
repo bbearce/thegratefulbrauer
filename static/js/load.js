@@ -131,23 +131,25 @@ $('#load').bind('click', function() {
     //// Rerun app calculations
 
     // Fermentables
-    $('#OG').text(calc_og().toFixed(3)); //toFixed() is a rounding method
-    make_chart();
+    refresh_fermentables()
 
     // Hops
-    get_hop_info()
-    $('#total_ibu').text(calc_ibu().toFixed(3)); //toFixed() is a rounding method 
-    make_hops_chart()
+    refresh_hops()
 
     // Yeast
+    refresh_yeast()
 
     // Mash
+    refresh_mash()
 
     // Water
+    refresh_water()
 
     // Chemistry
+    refresh_chemistry()
 
     // Fermentation
+    refresh_fermentation()
 
     
     
