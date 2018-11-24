@@ -92,6 +92,10 @@
     height: 700px;
 }
 
+.yeast_pitch_rates {
+    font-weight: bold;
+}
+
 .water-app-div{
     border-left: solid; 
     float: right;

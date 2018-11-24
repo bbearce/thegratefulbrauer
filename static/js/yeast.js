@@ -84,6 +84,10 @@ function refresh_yeast() {
     $('#Yeast').text(yeast_name)
     $('#Attenuation').text(yeast_properties.attenuation)
     $('#Pitch_Rate_Recommended').text((RCC/10**9).toFixed(3))
+    $('#Pitch_Rate_Grams_Recommended').text((11.5*(RCC/10**9)/200).toFixed(3))
+    $('#Pitch_Rate_Dry_Packets').text(((RCC/10**9)/200).toFixed(3))
+    $('#Pitch_Rate_WYEAST_Packets').text(2*((RCC/10**9)/200).toFixed(3))
+
 
     make_yeast_chart()
 

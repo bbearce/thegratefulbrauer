@@ -257,9 +257,9 @@ def save():
 
     else:
         recipe = "that recipe already exists"
-        
+    
     # Get updated list of recipes 
-    Recipes = [recipe.recipe for recipe in models.Recipe.query.all()]
+    Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.all()]
 
     return jsonify(recipe=recipe, Recipes=Recipes)
 
@@ -282,7 +282,7 @@ def delete():
         recipe = "that recipe does not exist"
 
     # Get updated list of recipes 
-    Recipes = [recipe.recipe for recipe in models.Recipe.query.all()]
+    Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.all()]
         
     return jsonify(recipe=recipe, Recipes=Recipes)
 

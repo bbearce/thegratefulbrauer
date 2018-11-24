@@ -7,7 +7,7 @@
     {% for column in yeast_columns %}
 
         {% if column == 'yeast_name' %}
-            <div style='display: iblock;'>
+            <div style='display: block;'>
                 <label style='display: block;'>{{ column|capitalize }}</label>
                 <select name='{{ column }}'>      
                     {% for ingredient in Yeast %}
@@ -17,8 +17,9 @@
             </div>
         {% else %}
             <div style='display: block;'>
-                <label style='display: block;'>{{ column|capitalize }}</label>
-                <input class = "display: inline-block;" type=text size=10 name={{ column }} value=0><span>Billions Used (Doesn't affect alcohol content)</span>
+                <label style='display: block;'>Pitched Cells</label>
+                <!--<label style='display: block;'>{{ column|capitalize }}</label>-->
+                <input class = "display: inline-block;" type=text size=10 name={{ column }} value=0><span>In units of billions used (Doesn't affect alcohol content). On the right is advised amounts, and on the left is amount actually used.</span>
             </div>
         {% endif %}
 
@@ -41,20 +42,24 @@
 
     <h3>Yeast Stats</h3>
 
-       <table>
+    <table>
       <tr>
         <th>Yeast</th>
-        <th>Attenuation</th> 
-        <th>Recommended Cells to Pitch</th>
+        <th>Attenuation</th>         
       </tr>
       <tr>
         <th id=Yeast>Default</th>
         <th id=Attenuation>0</th> 
-        <th id=Pitch_Rate_Recommended>0</th>
-
       </tr>
       
     </table>
+
+    <ul class='yeast_pitch_rates'>
+        <li>Advised Cells to Pitch (10^9): <span id =Pitch_Rate_Recommended>0</span></li>
+        <li>Grams (g): <span id =Pitch_Rate_Grams_Recommended>0</span></li>
+        <li>Dry Packets: <span id =Pitch_Rate_Dry_Packets>0</span></li>
+        <li>Wet (WYEAST) Packets: <span id =Pitch_Rate_WYEAST_Packets>0</span></li>
+    </ul>
 
     <!-- Chart Code -->
 
