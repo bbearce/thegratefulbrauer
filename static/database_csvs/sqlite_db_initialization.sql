@@ -14,11 +14,11 @@ sqlite> .import /Users/bbearce/Documents/thegratefulbrauer/static/database_csvs/
 
 
 # postgres
-\copy gb_constants_fermentables FROM '/Users/bbearce/Documents/Code/Heroku/Python_Brew_App/static/db_constants/fermentables distilled_values.csv' DELIMITER ',' CSV;
-\copy gb_constants_hops FROM '/Users/bbearce/Documents/Code/Heroku/Python_Brew_App/static/db_constants/hops.csv' DELIMITER ',' CSV;
-\copy gb_constants_styles FROM '/Users/bbearce/Documents/Code/Heroku/Python_Brew_App/static/db_constants/styles.csv' DELIMITER ',' CSV;
-\copy gb_constants_yeast FROM '/Users/bbearce/Documents/Code/Heroku/Python_Brew_App/static/db_constants/yeast.csv' DELIMITER ',' CSV;
-\copy gb_constants_gravity_correction_chart FROM '/Users/bbearce/Documents/Code/Heroku/Python_Brew_App/static/db_constants/gravity_correction_chart.csv' DELIMITER ',' CSV;
-\copy gb_constants_utilization_table FROM '/Users/bbearce/Documents/Code/Heroku/Python_Brew_App/static/db_constants/utilization_table.csv' DELIMITER ',' CSV
+\copy gb_constants_fermentables FROM '/⁨Users⁩/⁨bbearce⁩/⁨Documents⁩/⁨Code⁩/⁨Heroku⁩/⁨thegratefulbrauer⁩/⁨static⁩/⁨database_csvs⁩/fermentables distilled_values.csv' DELIMITER ',' CSV;
+\copy gb_constants_hops FROM '/⁨Users⁩/⁨bbearce⁩/⁨Documents⁩/⁨Code⁩/⁨Heroku⁩/⁨thegratefulbrauer⁩/⁨static⁩/⁨database_csvs⁩/hops.csv' DELIMITER ',' CSV;
+\copy gb_constants_styles FROM '/⁨Users⁩/⁨bbearce⁩/⁨Documents⁩/⁨Code⁩/⁨Heroku⁩/⁨thegratefulbrauer⁩/⁨static⁩/⁨database_csvs⁩styles.csv' DELIMITER ',' CSV;
+\copy gb_constants_yeast FROM '/⁨Users⁩/⁨bbearce⁩/⁨Documents⁩/⁨Code⁩/⁨Heroku⁩/⁨thegratefulbrauer⁩/⁨static⁩/⁨database_csvs⁩/yeast.csv' DELIMITER ',' CSV;
+\copy gb_constants_gravity_correction_chart FROM '/⁨Users⁩/⁨bbearce⁩/⁨Documents⁩/⁨Code⁩/⁨Heroku⁩/⁨thegratefulbrauer⁩/⁨static⁩/⁨database_csvs⁩/gravity_correction_chart.csv' DELIMITER ',' CSV;
+\copy gb_constants_utilization_table FROM '/⁨Users⁩/⁨bbearce⁩/⁨Documents⁩/⁨Code⁩/⁨Heroku⁩/⁨thegratefulbrauer⁩/⁨static⁩/⁨database_csvs⁩/utilization_table.csv' DELIMITER ',' CSV
 
 
