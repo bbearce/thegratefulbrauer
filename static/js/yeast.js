@@ -79,6 +79,7 @@ function refresh_yeast() {
 
     $('#abv').text(ABV.toFixed(1))
     $('#OG').text(OG.toFixed(3))
+    $('#og').text(OG.toFixed(3))
     $('#fg').text(FG.toFixed(3))
 
     $('#Yeast').text(yeast_name)
