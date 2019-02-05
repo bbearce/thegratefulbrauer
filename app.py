@@ -25,7 +25,6 @@ recipe_columns = [column.key for column in models.Recipe.__table__.columns][1:]
 for recipe_table in ['system','mash','fermentables','hops','yeast','water','fermentation','chemistry']:
     exec("{}_columns = [column.key for column in models.Recipe_{}.__table__.columns][2:]".format(recipe_table,recipe_table.capitalize())) 
 
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -78,47 +77,38 @@ def load():
         recipe_dict = {}
         for r in recipe_columns:
             recipe_dict[r] = getattr(Recipe, r)
-
+        
         exec("""
 system_dict = {}
 for s in system_columns:
     system_dict[s] = getattr(System, s)       
-
-
 fermentables_list = []
 for F in Fermentables:
     fermentables_dict = {}
     for f in fermentables_columns:
         fermentables_dict[f] = getattr(F, f)
     fermentables_list.append(fermentables_dict)
-
 hops_list = []
 for H in Hops:
     hops_dict = {}
     for h in hops_columns:
         hops_dict[h] = getattr(H, h)
     hops_list.append(hops_dict)
-
 mash_dict = {}
 for m in mash_columns:
     mash_dict[m] = getattr(Mash, m)
-
 yeast_dict = {}
 for y in yeast_columns:
     yeast_dict[y] = getattr(Yeast, y)
-
 water_dict = {}
 for w in water_columns:
     water_dict[w] = getattr(Water, w)
-
 fermentation_dict = {}
 for f in fermentation_columns:
     fermentation_dict[f] = getattr(Fermentation, f)
-
 chemistry_dict = {}
 for c in chemistry_columns:
     chemistry_dict[c] = getattr(Chemistry, c)
-
 data['Recipe']['gb_recipe_master'] = recipe_dict
 data['Recipe']['gb_recipe_system'] = system_dict
 data['Recipe']['gb_recipe_fermentables'] = fermentables_list
@@ -387,4 +377,5 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 33507))
     # manager.run()
     app.run(host='0.0.0.0', port=port)
+    # !import code; code.interact(local=vars()) #Note this down as well
 
