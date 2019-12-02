@@ -130,7 +130,7 @@ select {
     -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;       /* remove default arrow */
-    background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;   /* add custom arrow */
+    background: url("../img/dropdown_arrow.jpg") no-repeat right center;   /* add custom arrow */
     height: 34px;
     width: 500px; /* Currently overridden below */
 }
