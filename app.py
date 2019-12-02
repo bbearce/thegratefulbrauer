@@ -2,6 +2,7 @@ import os, json, pdb
 from flask import Flask, flash, jsonify, render_template, request, redirect, url_for
 from flask_script import Manager
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
