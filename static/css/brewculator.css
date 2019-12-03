@@ -127,10 +127,10 @@
 /* Select Styles */
 
 select {
-    -webkit-appearance: none; 
+    /*-webkit-appearance: none; 
     -moz-appearance: none;
-    appearance: none;       /* remove default arrow */
-    background: url("../img/dropdown_arrow.jpg") no-repeat right center;   /* add custom arrow */
+    appearance: none;       /* remove default arrow */*/
+    /*background: url("../img/dropdown_arrow.jpg") no-repeat right center;   /* add custom arrow */*/
     height: 34px;
     width: 500px; /* Currently overridden below */
 }
