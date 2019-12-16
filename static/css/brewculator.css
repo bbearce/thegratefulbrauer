@@ -2,6 +2,8 @@
     display: block;
     height: 300px;
     width: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 /*h3{
@@ -11,6 +13,12 @@
 .system-input-div{
     float: left;
     height: 200px;
+    width: 33%;
+}
+
+.home-input-div{
+    float: left;
+    height: 500px;
     width: 33%;
 }
 
@@ -63,6 +71,20 @@
     width: 65%;
     height: 200px;
 }
+
+.home-app-div{
+    border-left: solid; 
+    float: right;
+    width: 65%;
+    height: 500px;
+}
+
+#input-markdown {
+    height: 50%;
+    width: 100%;
+    font-size: 14pt;
+    text-align: left;
+} 
 
 .fermentables-app-div{
     border-left: solid; 
@@ -223,7 +245,7 @@ body {font-family: Arial;}
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding: 6px 0px 0px 0px;
     /*border: 1px solid #ccc;*/
     border-top: none;
 }
