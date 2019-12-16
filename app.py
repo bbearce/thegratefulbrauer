@@ -13,16 +13,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://xjedptgsjqocwi:25dfb7913372d
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-
-
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy(app)
-
-
-
-
-# from models import db  # <-- this needs to be placed after app is created
 
 manager = Manager(app)
 migrate = Migrate(app, db)
