@@ -1,6 +1,6 @@
-from __main__ import app
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app)
+from __main__ import db
+# from app import db # for migrations
+
 
 # Site tables
 class Role(db.Model):
@@ -128,6 +128,7 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     recipe = db.Column(db.String(64))
     style = db.Column(db.String(64))
+    notes = db.Column(db.Text())
     # Relationships
     fermentables = db.relationship('Recipe_Fermentables', backref='gb_recipe_master', cascade="all, delete-orphan" , lazy='dynamic')
     hops = db.relationship('Recipe_Hops', backref='gb_recipe_master', cascade="all, delete-orphan" , lazy='dynamic')

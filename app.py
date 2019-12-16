@@ -1,7 +1,7 @@
 import os, json, pdb
 from flask import Flask, flash, jsonify, render_template, request, redirect, url_for
 from flask_script import Manager
-
+from flask_migrate import Migrate
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -13,9 +13,19 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://xjedptgsjqocwi:25dfb7913372d
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-from models import db  # <-- this needs to be placed after app is created
+
+
+
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy(app)
+
+
+
+
+# from models import db  # <-- this needs to be placed after app is created
 
 manager = Manager(app)
+migrate = Migrate(app, db)
 
 # Grab DB table column names
 import models

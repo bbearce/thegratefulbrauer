@@ -1,0 +1,25 @@
+id,recipe_id,hop,weight_oz,boil_time_min
+442,250,Northwest Golding,1,1
+443,250,Northwest Golding,1,1
+444,250,Northwest Golding,1,1
+445,251,Northwest Golding,1,1
+446,251,Northwest Golding,1,1
+447,251,Northwest Golding,1,1
+463,257,Chinook,1,50
+464,257,Cascade (U.S.),1,20
+465,257,Simcoe,1,5
+478,262,Columbus,0.5,60
+479,262,East Kent Goldings,1,10
+480,262,None,0,0
+487,265,Northern Brewer (German),1,60
+488,265,Goldings (U.S.),0.5,5
+489,265,None,0,0
+433,247,Northwest Golding,1,1
+434,247,Northwest Golding,1,1
+435,247,Northwest Golding,1,1
+436,248,Northwest Golding,1,1
+437,248,Northwest Golding,1,1
+438,248,Northwest Golding,1,1
+439,249,Northwest Golding,1,1
+440,249,Northwest Golding,1,1
+441,249,Northwest Golding,1,1
