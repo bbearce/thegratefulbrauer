@@ -20,12 +20,6 @@ db = SQLAlchemy(app)
 manager = Manager(app)
 migrate = Migrate(app, db)
 
-# Test Comment
-# Test Comment
-# Test Comment
-# Test Comment
-
-# Test Comment
 
 # Grab DB table column names
 import models
