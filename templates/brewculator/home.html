@@ -1,0 +1,44 @@
+<div class="container">
+    <div class='home-input-div'>
+        <!-- Home Section -->
+            <div style='display: block;'>
+                <label style='display: block;'>New Recipe Name</label>
+                <input type=text size=25 name=recipe style='text-align: left; ' value='new recipe'>
+                <input id=save type="button" value="Save">             
+            </div>
+
+            <div>
+                <label style='display: block;'>Load Recipe</label>
+                <select id='recipe_load'>  
+                    {% for recipe in Recipes %}
+                        <option> {{ recipe.recipe }}</option>  
+                    {% endfor %}
+                </select>
+                <input id=load type="button" value="Load">
+            </div>
+
+            <div>
+                <label style='display: block;'>Delete Recipe</label>
+                <select id='recipe_delete'>      
+                    {% for recipe in Recipes %}
+                        <option> {{ recipe.recipe }}</option>  
+                    {% endfor %}
+                </select>
+                <input id=delete type="button" value="Delete"> 
+            </div>
+    </div>
+
+
+
+    <div class='home-app-div'>
+        <button id=convert_md_to_html onclick="convert_md_to_html()">Toggle MD and HTML</button>
+        <textarea id='notes' name='notes' type="text" style="display: block;">Enter New Recipe Notes</textarea>
+        <div id='output-html' style='display: none;'></div>
+    </div>
+
+    <div class="fl-fl">
+        <h2>Tool Bar</h2>
+        <a href="" target="_blank"> Like us!</a>
+    </div>
+
+</div>

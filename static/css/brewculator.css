@@ -2,6 +2,8 @@
     display: block;
     height: 300px;
     width: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
 }
 
 /*h3{
@@ -11,6 +13,12 @@
 .system-input-div{
     float: left;
     height: 200px;
+    width: 33%;
+}
+
+.home-input-div{
+    float: left;
+    height: 500px;
     width: 33%;
 }
 
@@ -63,6 +71,48 @@
     width: 65%;
     height: 200px;
 }
+
+/* Home App START */
+.home-app-div{
+    border-left: solid; 
+    float: right;
+    width: 65%;
+    height: 500px;
+}
+
+#notes {
+    height: 75%;
+    width: 100%;
+    font-size: 14pt;
+    text-align: left;
+} 
+
+/* Floating Social Media Bar Style Starts Here */
+
+.fl-fl {
+    color: #fff;
+    background: #000000;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 4px;
+    width: 190px;
+    position: fixed;
+    right: -140px;
+    z-index: 1000;
+    top: 180px;
+    font: normal normal 10px Arial;
+    -webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -ms-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
+  }
+
+.fl-fl:hover {
+    right: 0;
+}
+  
+/* Home App END */
 
 .fermentables-app-div{
     border-left: solid; 
@@ -223,7 +273,7 @@ body {font-family: Arial;}
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding: 6px 0px 0px 0px;
     /*border: 1px solid #ccc;*/
     border-top: none;
 }

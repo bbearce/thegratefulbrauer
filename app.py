@@ -19,6 +19,7 @@ db = SQLAlchemy(app)
 manager = Manager(app)
 migrate = Migrate(app, db)
 
+
 # Grab DB table column names
 import models
 
@@ -71,11 +72,12 @@ def load():
 
         # Multiple row tables
         for table in ['Fermentables','Hops']:
-          exec('{} = models.Recipe_{}.query.filter_by(recipe_id = Recipe.id).all()'.format(table, table))
+            exec('{} = models.Recipe_{}.query.filter_by(recipe_id = Recipe.id).all()'.format(table, table))
 
         # Build data json dictionary based on models.
 
-        data = {'Recipe':{}}
+
+        data = {'Recipe':{}} 
 
         recipe_dict = {}
         for r in recipe_columns:
@@ -136,9 +138,10 @@ data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
 @app.route('/save')
 def save():
     
-    # Common to all
+    # Common to all (in db: gb_recipe_system)
     recipe = request.args.get('recipe', 0, type=str)
     style = request.args.get('style', 0, type=str)
+    notes = request.args.get('notes', 0, type=str)
 
     # Grab all input values from html pages
     for s in system_columns:
@@ -170,7 +173,7 @@ def save():
         exec("{} = request.args.get('{}', 0, type=str)".format(c,c))
 
     # check if this already exists
-    Recipe = models.Recipe(recipe=recipe, style=style)
+    Recipe = models.Recipe(recipe=recipe, style=style, notes=notes)
     
     if(len(models.Recipe.query.filter_by(recipe=Recipe.recipe).all()) == 0):
         print("this recipe doesn't exist so we are adding it.")
@@ -356,7 +359,6 @@ def brewculator():
     num_of_inputs = 3
     hcolumns = [zip(hops_columns,[i]*(len(hops_columns)+1)) for i in range(1,num_of_inputs+1)]
     hcolumns = [[j for j in i] for i in hcolumns] # Python3 has zips as generators so I have to convert
-
 
     return render_template('/brewculator/brewculator.html',
                            Data = json.dumps(data),
