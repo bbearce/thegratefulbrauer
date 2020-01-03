@@ -20,6 +20,7 @@ $('#load').bind('click', function() {
 
     // Recipe
     $('select[name="style"]').val(loaded_data['data']['Recipe']['gb_recipe_master']['style'])
+    $('textarea[name="notes"]').val(loaded_data['data']['Recipe']['gb_recipe_master']['notes'])
 
     // System
     $('input[name="batch_size"]').val(loaded_data['data']['Recipe']['gb_recipe_system']['batch_size'])
@@ -128,8 +129,12 @@ $('#load').bind('click', function() {
     //Send User Message
     alert("You just loaded "+loaded_data['data']['Recipe']['gb_recipe_master']['recipe'])
 
+    
     //// Rerun app calculations
 
+    // Load Notes and set to HTML mode
+    convert_md_to_html()
+    
     // Fermentables
     refresh_fermentables()
 
@@ -151,8 +156,7 @@ $('#load').bind('click', function() {
     // Fermentation
     refresh_fermentation()
 
-    
-    
+
     }
 
 

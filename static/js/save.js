@@ -7,6 +7,8 @@ $('#save').bind('click',
                // Recipe
                recipe: $('input[name="recipe"]').val(),
                style: $('select[name="style"]').val(),
+               notes: $('textarea[name="notes"]').val(),
+               
 
                // System Table
                batch_size: $('input[name="batch_size"]').val(),
