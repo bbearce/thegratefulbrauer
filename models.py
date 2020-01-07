@@ -1,4 +1,4 @@
-from __main__ import db, UserMixin
+from __main__ import db#, UserMixin
 # from app import db # for migrations
 
 
