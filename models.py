@@ -13,7 +13,7 @@ class Role(db.Model):
         return '<Role %r>' % self.name
 
 
-class User(UserMixin, db.Model):
+class User(db.Model): #UserMixin, when ready
     __tablename__ = 'gb_site_users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
