@@ -156,6 +156,8 @@ $('#load').bind('click', function() {
     // Fermentation
     refresh_fermentation()
 
+    // System
+    change_style_image()
 
     }
 
