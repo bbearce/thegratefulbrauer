@@ -1,4 +1,4 @@
-from __main__ import db
+from __main__ import db, UserMixin
 # from app import db # for migrations
 
 
@@ -13,7 +13,7 @@ class Role(db.Model):
         return '<Role %r>' % self.name
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'gb_site_users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
@@ -21,6 +21,19 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+ 
+    # If you inherit from UserMixin (from flask_login module)
+    # def is_authenticated(self):
+    #     return True
+
+    # def is_active(self):
+    #     return True
+
+    # def is_anonymous(self):
+    #     return True
+
+    # def get_id(self):
+    #     return 'user'
 
 
 # Constants tables

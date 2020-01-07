@@ -3,7 +3,7 @@ function convert_md_to_html(){
     // Get markdown to convert
     var notes = document.getElementById('notes').value
 
-    var converter = new showdown.Converter();
+    var converter = new showdown.Converter({'tables':true}); // local option for enabling tables in MD.
     var html = converter.makeHtml(notes);
     
     var output_html = document.getElementById('output-html')

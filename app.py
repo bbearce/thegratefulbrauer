@@ -3,11 +3,20 @@ from flask import Flask, flash, jsonify, render_template, request, redirect, url
 from flask_script import Manager
 from flask_migrate import Migrate
 
+
+# Forms
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
+
+# Login
+from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin, current_user
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' # Remind yourself why you need this?
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' # Remind yourself why you need this? Answer:  must be set to use sessions...90% sure
 #app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://bbearce:pass_;)_yeah_right@localhost/gratefulbrauer"
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://xjedptgsjqocwi:25dfb7913372da245831b379d76ddb39eaf18eac98eade1b9542bc3ff0936dc4@ec2-23-21-229-48.compute-1.amazonaws.com:5432/d4hvr3omam72o1"
 
@@ -52,7 +61,59 @@ def Specific_Lagers(name):
 
 ### Brewculator ###
 
-# Begin Views or more correctly, routes...
+
+# Login - https://www.youtube.com/watch?v=2dEM-s3mRLE
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+class LoginForm(FlaskForm):
+    name = StringField('name', validators=[DataRequired()])
+
+@login_manager.user_loader
+def load_user(user_id):
+    return models.User.query.get(int(user_id))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Here we use a class of some kind to represent and validate our
+    # client-side form data. For example, WTForms is a library that will
+    # handle this for us, and we use a custom LoginForm to validate.
+    form = LoginForm()
+    if form.validate_on_submit():
+        # Login and validate the user.
+        # user should be an instance of your `User` class
+        user = models.User.query.filter_by(username=form.name.data).first()
+
+        if user is None:
+            return redirect(url_for('login'))
+
+        login_user(user)
+        flash('Logged in requested for user {}'.format(form.name.data))
+        return redirect(url_for('brewculator'))
+
+    return render_template('/brewculator/login.html', form=form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+@app.route("/secret")
+@login_required
+def secret():
+    return render_template('/brewculator/secret.html', user = current_user.username)
+
+@app.route("/somepage")
+@login_required
+def somepage():
+    return render_template('/brewculator/somepage.html')
+
+
+
+# Begin CRUD Views or more correctly, routes...
 @app.route('/load')
 def load():
 
