@@ -5,12 +5,16 @@ from flask_migrate import Migrate
 
 
 # Forms
-# from flask_wtf import FlaskForm
-# from wtforms import StringField
-# from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
 
 # Login
-# from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin, current_user
+from flask_login import LoginManager, login_required, login_user, logout_user, UserMixin, current_user
+
+# S3
+import boto3
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -62,54 +66,161 @@ def Specific_Lagers(name):
 ### Brewculator ###
 
 
-# # Login - https://www.youtube.com/watch?v=2dEM-s3mRLE
-# login_manager = LoginManager()
-# login_manager.init_app(app)
+# Login - https://www.youtube.com/watch?v=2dEM-s3mRLE
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+class LoginForm(FlaskForm):
+    name = StringField('username', validators=[DataRequired()])
+
+class SignUpForm(FlaskForm):
+    name = StringField('username', validators=[DataRequired()])
+
+@login_manager.user_loader
+def load_user(user_id):
+    return models.User.query.get(int(user_id))
 
 
-# class LoginForm(FlaskForm):
-#     name = StringField('name', validators=[DataRequired()])
+@app.route('/signup', methods=['POST'])
+def signup():
+    """
+    Use this endpoint to add a username to the database
+    """
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return models.User.query.get(int(user_id))
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     # Here we use a class of some kind to represent and validate our
-#     # client-side form data. For example, WTForms is a library that will
-#     # handle this for us, and we use a custom LoginForm to validate.
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         # Login and validate the user.
-#         # user should be an instance of your `User` class
-#         user = models.User.query.filter_by(username=form.name.data).first()
-
-#         if user is None:
-#             return redirect(url_for('login'))
-
-#         login_user(user)
-#         flash('Logged in requested for user {}'.format(form.name.data))
-#         return redirect(url_for('brewculator'))
-
-#     return render_template('/brewculator/login.html', form=form)
+    # We need this here because we only have 
+    # one login page and it needs both forms
+    login_form = LoginForm() 
 
 
-# @app.route('/logout')
-# @login_required
-# def logout():
-#     logout_user()
-#     return redirect(url_for('index'))
+    # Check if the user entered a name
+    signup_form = SignUpForm()
+    if signup_form.validate_on_submit():
+        # First check to see if  we have that user already
 
-# @app.route("/secret")
-# @login_required
-# def secret():
-#     return render_template('/brewculator/secret.html', user = current_user.username)
+        role = models.Role.query.filter_by(name='user')[0]
+        print(role)
+        user = models.User(username = signup_form.name.data, role_id = role.id)
+        print(user)
+        user_exists_already = False if models.User.query.filter_by(username=signup_form.name.data).first() is None else True
 
-# @app.route("/somepage")
-# @login_required
-# def somepage():
-#     return render_template('/brewculator/somepage.html')
+        if user_exists_already:
+            flash('User \"{}\" already exists.')
+            return redirect(url_for('login'))            
+
+        
+
+        db.session.add(user)
+        db.session.commit()
+        db.session['user'] = user.username
+        login_user(user)
+        flash('Added {} to our users list!'.format(signup_form.name.data))    
+        return redirect(url_for('brewculator'))    
+
+    flash('Added {} to our users list!'.format(signup_form.name.data))
+
+    return render_template('/brewculator/login.html', login_form=login_form, signup_form=signup_form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Here we use a class of some kind to represent and validate our
+    # client-side form data. For example, WTForms is a library that will
+    # handle this for us, and we use a custom LoginForm to validate.
+
+    # We need this here because we only have 
+    # one login page and it needs both forms  
+    signup_form = SignUpForm()
+
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        # Login and validate the user.
+        # user should be an instance of your `User` class
+        user = models.User.query.filter_by(username=login_form.name.data).first()
+
+
+        # If we don't have that user yet let them know and redirect to login page.
+        if user is None:
+            flash('Your username was not in our database. Please Sign up.')
+            return redirect(url_for('login'))
+
+        login_user(user)
+        flash('User {} logged in successfully! Try out the Brewculator!'.format(login_form.name.data))
+        return redirect(url_for('login'))
+
+    return render_template('/brewculator/login.html', login_form=login_form, signup_form=signup_form)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You are logged out.')
+    return redirect(url_for('index'))
+
+
+
+# Upload file endpoint
+@app.route('/media_upload', methods=['POST'])
+def media_upload():
+
+
+    # Get user'recipe_description_images/'+User+'/recipes/'+recipe_folder+file.filename
+    User = current_user.username
+    recipe_root = 'recipe_description_images/'+User+'/recipes/'
+
+    file = request.files['file']
+    recipe_folder = request.form['Recipe Folder']+'/' if request.form['Recipe Folder'] != '' else ''
+
+    print(file)
+    print(recipe_root)
+
+    s3_key='recipe_description_images/'+User+'/recipes/'+recipe_folder+file.filename
+    # load S3 images for current user
+    # Let's use Amazon S3
+    s3 = boto3.resource('s3')
+    my_bucket = s3.Bucket('thegratefulbrauer')
+    my_bucket.put_object(Key=s3_key, Body=file)
+
+    flash('successfully uploaded: {}'.format(file.filename))
+
+    # # Refresh Summaries
+    # summaries = my_bucket.objects.all()
+    # summaries = []
+    # for s in my_bucket.objects.all():
+    #     if s.key.find('.jpg') != -1:
+    #         summaries.append(
+    #             {'key':s.key.replace(recipe_root,''),
+    #              'last_modified': s.last_modified,
+    #             }
+    #         )
+    
+
+
+    return redirect(url_for('brewculator')) 
+
+
+# Delete file endpoint
+@app.route('/media_delete', methods=['POST'])
+def media_delete():
+
+
+    # Get user'recipe_description_images/'+User+'/recipes/'+recipe_folder+file.filename
+    User = current_user.username
+    file = request.form['key']
+    
+    s3_key='recipe_description_images/'+User+'/recipes/'+file
+    s3 = boto3.resource('s3')
+    my_bucket = s3.Bucket('thegratefulbrauer')
+    my_bucket.Object(s3_key).delete()   
+    flash('successfully deleted: {}'.format(s3_key))
+
+
+
+
+
+    return redirect(url_for('brewculator')) 
+
 
 
 
@@ -345,8 +456,30 @@ def delete():
 
 
 @app.route('/brewculator')
+@login_required
 def brewculator():
 
+    # Get user
+    User = current_user.username
+
+    recipe_root = 'recipe_description_images/'+User+'/recipes/'
+    print(recipe_root)
+    # load S3 images for current user
+    # Let's use Amazon S3
+    s3 = boto3.client('s3')
+    objects = s3.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
+
+    summaries = []
+    for s in objects['Contents']:
+        if s['Key'].find('.jpg') != -1 and s['Key'].find(recipe_root) != -1:
+            print('asfasdfasd: ',s['Key'])
+            print(s['Key'].find(recipe_root))
+            summaries.append(
+                {'key':s['Key'].replace(recipe_root,''),
+                 'last_modified': s['LastModified']
+                }
+            )
+            
     # Get fermentables (not recipe values but constants)
     Recipes = models.Recipe.query.all()
     Styles = models.Styles.query.order_by('styles').all()
@@ -422,6 +555,7 @@ def brewculator():
     hcolumns = [[j for j in i] for i in hcolumns] # Python3 has zips as generators so I have to convert
 
     return render_template('/brewculator/brewculator.html',
+                           User = User, Files=summaries,
                            Data = json.dumps(data),
                            Recipes=Recipes,
                            Styles = Styles,

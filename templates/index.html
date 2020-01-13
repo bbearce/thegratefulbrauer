@@ -27,6 +27,18 @@
     <h1 class="greetings">Beer is good.</h1>
 
 
+    <!-- For Flask messages -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}  
+        <script type="text/javascript">
+            alert('{{ message }}')
+        </script>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <!-- For Flask messages -->
+
     <div class="container">
     <div class="row imagetiles">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">

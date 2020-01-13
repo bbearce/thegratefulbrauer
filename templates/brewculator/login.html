@@ -1,5 +1,65 @@
-<form method="POST" action="">
-    {{ form.csrf_token }}
-    {{ form.name.label }} {{ form.name(size=20) }}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login\SignUp</title>
+
+    <!-- Outside CSS and JS -->    
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Custom CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/thegratefulbrauer.css">
+    <link rel="stylesheet" href="/static/css/brewculator.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">    
+
+
+</head>
+
+<body>
+
+{% extends "nav-bar.html" %}
+
+{% block Content_or_Rmd %}
+
+
+<h1>Login Page:</h1>
+
+<!-- For Flask messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}  
+    <script type="text/javascript">
+        alert('{{ message }}')
+    </script>
+    
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<!-- For Flask messages -->
+
+
+<br>
+<br>
+
+<p>Please Login First:</>
+<form method="POST" action="/login">
+    {{ login_form.csrf_token }}
+    {{ login_form.name.label }} {{ login_form.name(size=20) }}
     <input type="submit" value="Login">
 </form>
+
+<p>If you are not a user yet, just register here:</p>
+
+<form method="POST" action="/signup">
+    {{ signup_form.csrf_token }}
+    {{ signup_form.name.label }} {{ signup_form.name(size=20) }}
+    <input type="submit" value="Sign Up">
+</form>
+
+{% endblock %}
+</body>
+
+</html>

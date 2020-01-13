@@ -90,14 +90,16 @@
 /* Floating Social Media Bar Style Starts Here */
 
 .fl-fl {
-    color: #fff;
-    background: #000000;
-    text-transform: uppercase;
+
+    height: 75%;
+    width: 75%;
+    color: #000;
+    background: #fff;
+    border: solid 1px;
     letter-spacing: 3px;
     padding: 4px;
-    width: 190px;
     position: fixed;
-    right: -140px;
+    right: -600px;
     z-index: 1000;
     top: 180px;
     font: normal normal 10px Arial;
@@ -108,9 +110,16 @@
     transition: all .25s ease;
   }
 
-.fl-fl:hover {
+/*.fl-fl:hover {
     right: 0;
+}*/
+
+
+
+.close-button {
+    float: right;
 }
+
   
 /* Home App END */
 

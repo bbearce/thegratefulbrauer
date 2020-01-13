@@ -1,5 +1,5 @@
-from __main__ import db#, UserMixin
-# from app import db # for migrations
+from __main__ import db, UserMixin
+# from app import db, UserMixin # for migrations
 
 
 # Site tables
@@ -13,7 +13,7 @@ class Role(db.Model):
         return '<Role %r>' % self.name
 
 
-class User(db.Model): #UserMixin, when ready
+class User(db.Model, UserMixin): #UserMixin, when ready
     __tablename__ = 'gb_site_users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)

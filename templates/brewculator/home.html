@@ -32,13 +32,67 @@
 
     <div class='home-app-div'>
         <button id=convert_md_to_html onclick="convert_md_to_html()">Toggle MD and HTML</button>
+        <button id=upload_dialog onclick="toggle_image_upload()">Manage Img/Video Uploads</button>
         <textarea id='notes' name='notes' type="text" style="display: block;">Enter New Recipe Notes</textarea>
         <div id='output-html' style='display: none;'></div>
     </div>
 
+
+    <!-- Tool Bar -->
     <div class="fl-fl">
-        <h2>Tool Bar</h2>
-        <a href="" target="_blank"> Like us!</a>
+
+
+      <!-- Close upload dialog -->
+      <button id=close_media_upload class="close-button" onclick="toggle_image_upload()">Close</button>
+
+      <!-- Upload media form -->
+      <form id=media_upload_form class="upload_form" action="/media_upload" method=post enctype="multipart/form-data">
+          <input type="file" name=file>
+          <button type=submit name=file_upload class="btn btn-primary">Upload</button>
+          <hr>
+          <strong>If you entered in recipe info and haven't saved it, you need to before uploading an image. If not the page will refresh and you will have to re-enter all recipe info.</strong>
+          <hr>
+          <p>Your account has space here:</p>
+          <p>thegratefulbrauer/recipe_description_images/{{ User }}/recipes/<input type="text" name="Recipe Folder"></p>
+          <hr>
+      </form>
+
+
+      <!-- Results table -->
+      <div>
+          
+
+          <table class=table>
+              <tr>
+                  <th>Recipe/Filename</th>
+                  <th>Last Modified</th>
+                  <th>Path</th>
+                  <th>Preview</th>
+                  <th>Delete</th>
+              </tr>
+              {% for f in Files %}
+              <tr>
+                  <td>{{ f.key }}</td>
+                  <td>{{ f.last_modified }}</td>
+                  <td><a href="https://thegratefulbrauer.s3.amazonaws.com/recipe_description_images/{{ User}}/recipes/{{ f.key }}">View</a></td>
+                  <td><img style="width: 20px; height: 20px;" src="https://thegratefulbrauer.s3.amazonaws.com/recipe_description_images/{{ User}}/recipes/{{ f.key }}"></td>
+                  <td>
+                      <form class=delete_form action={{ url_for('media_delete') }} method=post>
+                          <input type="hidden" name="key" value={{ f.key }}>
+                          <button type=submit class="btn btn-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
+                      </form>
+                  </td>
+
+
+              </tr>
+              {% endfor %}
+
+          </table>
+
+
+      </div>
+
+
     </div>
 
 </div>
