@@ -26,7 +26,7 @@ function toggle_image_upload() {
     var upload_image_position = document.getElementsByClassName('fl-fl')[0]
 
     if (upload_image_position.style.right === '100px') {
-        upload_image_position.style.right = "-600px"
+        upload_image_position.style.right = "-2000px"
     } else {
         upload_image_position.style.right = "100px"
     }

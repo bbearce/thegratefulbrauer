@@ -14,9 +14,6 @@ recipe_root = 'recipe_description_images/'+'asdf'+'/recipes/'
 s3 = boto3.client('s3')
 objects = s3.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
 
-print(recipe_root)
-
-
 summaries = []
 for s in objects['Contents']:
     if s['Key'].find('.jpg') != -1 and s['Key'].find(recipe_root) != 1:

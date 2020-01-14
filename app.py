@@ -112,7 +112,7 @@ def signup():
 
         db.session.add(user)
         db.session.commit()
-        db.session['user'] = user.username
+        
         login_user(user)
         flash('Added {} to our users list!'.format(signup_form.name.data))    
         return redirect(url_for('brewculator'))    
