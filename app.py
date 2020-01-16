@@ -99,9 +99,7 @@ def signup():
         # First check to see if  we have that user already
 
         role = models.Role.query.filter_by(name='user')[0]
-        print(role)
         user = models.User(username = signup_form.name.data, role_id = role.id)
-        print(user)
         user_exists_already = False if models.User.query.filter_by(username=signup_form.name.data).first() is None else True
 
         if user_exists_already:
@@ -172,15 +170,14 @@ def media_upload():
     file = request.files['file']
     recipe_folder = request.form['Recipe Folder']+'/' if request.form['Recipe Folder'] != '' else ''
 
-    print(file)
-    print(recipe_root)
-
     s3_key='recipe_description_images/'+User+'/recipes/'+recipe_folder+file.filename
     # load S3 images for current user
     # Let's use Amazon S3
     s3 = boto3.resource('s3')
     my_bucket = s3.Bucket('thegratefulbrauer')
-    my_bucket.put_object(Key=s3_key, Body=file)
+
+    # ContentType Notes: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+    my_bucket.put_object(Key=s3_key, Body=file, ContentType='image/jpeg')   
 
     flash('successfully uploaded: {}'.format(file.filename))
 
@@ -215,10 +212,6 @@ def media_delete():
     my_bucket.Object(s3_key).delete()   
     flash('successfully deleted: {}'.format(s3_key))
 
-
-
-
-
     return redirect(url_for('brewculator')) 
 
 
@@ -238,24 +231,36 @@ def load():
         Recipe = models.Recipe.query.filter_by(recipe = recipe).first()
         Recipe.id # this tests for AttributeError
 
-        # Single row tables
-        for table in ['System','Mash','Yeast','Water','Fermentation','Chemistry']:
-            exec('{} = models.Recipe_{}.query.filter_by(recipe_id = Recipe.id).first()'.format(table, table))
+    except AttributeError as error:
+        print("this recipe doesn't exist so we can't load it.")
 
-        # Multiple row tables
-        for table in ['Fermentables','Hops']:
-            exec('{} = models.Recipe_{}.query.filter_by(recipe_id = Recipe.id).all()'.format(table, table))
+        recipe = "that recipe doesn't exist"
 
-        # Build data json dictionary based on models.
+        return jsonify(recipe=recipe)
+
+    # BB - user User to add filter
+    user = models.User.query.filter_by(username = current_user.username).first()
+    
+    # Single row tables
+    for table in ['System','Mash','Yeast','Water','Fermentation','Chemistry']:
+        exec('{} = models.Recipe_{}.query.filter_by(recipe_id = Recipe.id, user_id = user.id).first()'.format(table, table))
+
+    # Multiple row tables
+    for table in ['Fermentables','Hops']:
+        exec('{} = models.Recipe_{}.query.filter_by(recipe_id = Recipe.id, user_id = user.id).all()'.format(table, table))
+
+    # Build data json dictionary based on models.
 
 
-        data = {'Recipe':{}} 
+    # BB - This is serializing...maybe a better way...
 
-        recipe_dict = {}
-        for r in recipe_columns:
-            recipe_dict[r] = getattr(Recipe, r)
-        
-        exec("""
+    data = {'Recipe':{}} 
+
+    recipe_dict = {}
+    for r in recipe_columns:
+        recipe_dict[r] = getattr(Recipe, r)
+    
+    exec("""
 system_dict = {}
 for s in system_columns:
     system_dict[s] = getattr(System, s)       
@@ -295,16 +300,10 @@ data['Recipe']['gb_recipe_yeast'] = yeast_dict
 data['Recipe']['gb_recipe_water'] = water_dict
 data['Recipe']['gb_recipe_fermentation'] = fermentation_dict
 data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
-            """)
+    """)
 
-        return jsonify(data=data)
+    return jsonify(data=data)
 
-    except AttributeError as error:
-        print("this recipe doesn't exist so we can't load it.")
-
-        recipe = "that recipe doesn't exist"
-
-        return jsonify(recipe=recipe)
  
 
 @app.route('/save')
@@ -459,29 +458,49 @@ def delete():
 @login_required
 def brewculator():
 
-    # Get user
-    User = current_user.username
+    # Get user    
+    user = models.User.query.filter_by(username = current_user.username)[0]
 
-    recipe_root = 'recipe_description_images/'+User+'/recipes/'
-    print(recipe_root)
+    recipe_root = 'recipe_description_images/'+user.username+'/recipes/'
+
     # load S3 images for current user
-    # Let's use Amazon S3
-    s3 = boto3.client('s3')
-    objects = s3.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
+    # Let's use Amazon S3: cleint and resource have different actions and abilities
+    s3_client = boto3.client('s3')
+    s3_resource = boto3.resource('s3')
+    
+    s3_resource = boto3.resource('s3')
+    bucket = s3_resource.Bucket('thegratefulbrauer')
+    objs = list(bucket.objects.filter(Prefix=recipe_root))
 
-    summaries = []
-    for s in objects['Contents']:
-        if s['Key'].find('.jpg') != -1 and s['Key'].find(recipe_root) != -1:
-            print('asfasdfasd: ',s['Key'])
-            print(s['Key'].find(recipe_root))
-            summaries.append(
-                {'key':s['Key'].replace(recipe_root,''),
-                 'last_modified': s['LastModified']
-                }
-            )
+    # This will be the default value unless other objects are found
+    summaries = [{'key': 'None','last_modified':'None'}]
+
+    if(len(objs)>1):
+        print("key exists")
+        objects = s3_client.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
+        summaries = []
+        for s in objects['Contents']:
+            if s['Key'].find('.jpg') != -1 and s['Key'].find(recipe_root) != -1:
+                print(s['Key'].find(recipe_root))
+                summaries.append(
+                    {'key':s['Key'].replace(recipe_root,''),
+                     'last_modified': s['LastModified']
+                    }
+                )
+
+    else:
+        print("key doesn't exist, add this key")
+        my_bucket = s3_resource.Bucket('thegratefulbrauer')
+        my_bucket.put_object(Bucket='thegratefulbrauer', Body='', Key=recipe_root)
+
+
+
+
+
+
             
     # Get fermentables (not recipe values but constants)
-    Recipes = models.Recipe.query.all()
+    Recipes = models.Recipe.query.filter_by(user_id = user.id).all()
     Styles = models.Styles.query.order_by('styles').all()
     Fermentables = models.Fermentables.query.all()
     Hops = models.Hops.query.all()
@@ -549,13 +568,14 @@ def brewculator():
     fcolumns = [zip(fermentables_columns,[i]*(len(fermentables_columns)+1)) for i in range(1,num_of_inputs+1)]
     fcolumns = [[j for j in i] for i in fcolumns] # Python3 has zips as generators so I have to convert
 
+
     # Dynamic Control for Hops Inputs
     num_of_inputs = 3
     hcolumns = [zip(hops_columns,[i]*(len(hops_columns)+1)) for i in range(1,num_of_inputs+1)]
     hcolumns = [[j for j in i] for i in hcolumns] # Python3 has zips as generators so I have to convert
 
     return render_template('/brewculator/brewculator.html',
-                           User = User, Files=summaries,
+                           User = user.username, Files=summaries,
                            Data = json.dumps(data),
                            Recipes=Recipes,
                            Styles = Styles,

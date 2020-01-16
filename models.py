@@ -139,6 +139,7 @@ class Recipe(db.Model):
     __tablename__ = 'gb_recipe_master'
     # Columns
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe = db.Column(db.String(64))
     style = db.Column(db.String(64))
     notes = db.Column(db.Text())
@@ -158,6 +159,7 @@ class Recipe(db.Model):
 class Recipe_System(db.Model):
     __tablename__ = 'gb_recipe_system'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     batch_size = db.Column(db.Float)
     extraction_efficiency = db.Column(db.Float)
@@ -168,6 +170,7 @@ class Recipe_System(db.Model):
 class Recipe_Fermentables(db.Model):
     __tablename__ = 'gb_recipe_fermentables'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     ingredient = db.Column(db.String(64))
     weight_lbs = db.Column(db.Float)
@@ -178,6 +181,7 @@ class Recipe_Fermentables(db.Model):
 class Recipe_Hops(db.Model):
     __tablename__ = 'gb_recipe_hops'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     hop = db.Column(db.String(64))
     weight_oz = db.Column(db.Float)
@@ -190,6 +194,7 @@ class Recipe_Hops(db.Model):
 class Recipe_Mash(db.Model):
     __tablename__ = 'gb_recipe_mash'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     init_grain_temp = db.Column(db.Float)
     sacc_rest_temp = db.Column(db.Float)
@@ -201,7 +206,8 @@ class Recipe_Mash(db.Model):
 
 class Recipe_Yeast(db.Model):
     __tablename__ = 'gb_recipe_yeast'
-    id = db.Column(db.Integer, primary_key=True)    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))  
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     yeast_name = db.Column(db.String(64))
     init_cells = db.Column(db.Float)
@@ -212,6 +218,7 @@ class Recipe_Yeast(db.Model):
 class Recipe_Water(db.Model):
     __tablename__ = 'gb_recipe_water'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     total_boil_time = db.Column(db.Float)
     evap_rate = db.Column(db.Float)
@@ -230,6 +237,7 @@ class Recipe_Water(db.Model):
 class Recipe_Fermentation(db.Model):
     __tablename__ = 'gb_recipe_fermentation'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     days1 = db.Column(db.Integer)
     temp1 = db.Column(db.Integer)
@@ -250,6 +258,7 @@ class Recipe_Fermentation(db.Model):
 class Recipe_Chemistry(db.Model):
     __tablename__ = 'gb_recipe_chemistry'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('gb_site_users.id'))
     recipe_id = db.Column(db.Integer, db.ForeignKey('gb_recipe_master.id', ondelete='CASCADE'), nullable=False)
     init_Ca = db.Column(db.Float)
     init_Mg = db.Column(db.Float)

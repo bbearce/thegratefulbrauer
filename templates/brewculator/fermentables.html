@@ -8,10 +8,10 @@
       
       <div style='display: block;'>
         <div style='display: inline-block;'>
-          <label style='display: block;'>{{ column_set[0][0]|capitalize }}{{ column_set[0][1] }}</label>
+          <label style='display: block;'>{{ column_set[1][0]|capitalize }}{{ column_set[1][1] }}</label>
 
           <!-- Testing inputs -->
-          <select  name='{{ column_set[0][0] }}{{ column_set[0][1] }}'>      
+          <select  name='{{ column_set[1][0] }}{{ column_set[1][1] }}'>      
               {% for ingredient in Fermentables %}
                   <option> {{ ingredient.ingredients }}</option>  
               {% endfor %}
@@ -21,11 +21,11 @@
         </div>
       
         <div style='display: inline-block;'>
-          <label style='display: block;'>{{ column_set[1][0]|capitalize }}{{ column_set[1][1] }}</label>
+          <label style='display: block;'>{{ column_set[2][0]|capitalize }}{{ column_set[2][1] }}</label>
           <input type=text
                  class=fermentables_weight
                  size=10 
-                 name='{{ column_set[1][0] }}{{ column_set[1][1] }}'
+                 name='{{ column_set[2][0] }}{{ column_set[2][1] }}'
                  value=0>
         </div>
       </div>

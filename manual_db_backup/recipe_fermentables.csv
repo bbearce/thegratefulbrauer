@@ -9,11 +9,26 @@ id,recipe_id,ingredient,weight_lbs
 721,251,0 - None,0
 722,251,0 - None,0
 723,251,0 - None,0
+874,282,Pilsner, German (Saltzgitter),12.5
+875,282,Caramel_80 (Briess),0.75
+876,282,Candi Sugar, Blonde (Soft),1
+877,282,0 - None,0
+878,282,0 - None,0
+907,315,0 - None,0
+908,315,0 - None,0
+909,315,0 - None,0
+910,315,0 - None,0
+911,315,0 - None,0
 749,257,2-Row Malt (Rahr),10
 750,257,Caramel_40 (Briess),0.75
 751,257,0 - None,0
 752,257,0 - None,0
 753,257,0 - None,0
+937,321,Pale Ale Malt (Briess),9
+938,321,Rye Malt (Weyermann),1
+939,321,Chocolate Rye (Weyermann),0.25
+940,321,Crystal, Medium (Simpsons),0.25
+941,321,Special Roast (Briess),0.25
 699,247,0 - None,0
 700,247,0 - None,0
 701,247,0 - None,0
@@ -29,11 +44,6 @@ id,recipe_id,ingredient,weight_lbs
 711,249,0 - None,0
 712,249,0 - None,0
 713,249,0 - None,0
-774,262,Pale Ale Malt (Briess),9
-775,262,Rye Malt (Weyermann),1
-776,262,Chocolate Rye (Weyermann),0.25
-777,262,Crystal, Medium (Simpsons),0.25
-778,262,Special Roast (Briess),0.25
 789,265,2-Row Malt (Rahr),9
 790,265,Pilsen (Franco-Belges),5
 791,265,Candi Sugar, Blonde (Soft),1
