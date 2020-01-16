@@ -480,7 +480,7 @@ def brewculator():
         objects = s3_client.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
         summaries = []
         for s in objects['Contents']:
-            if s['Key'].find('.jpg') != -1 and s['Key'].find(recipe_root) != -1:
+            if (s['Key'].find('.jpg') != -1 or s['Key'].find('.jpeg') != -1 or s['Key'].find('.JPG') != -1 or s['Key'].find('.PNG') != -1 or s['Key'].find('.png') != -1) and s['Key'].find(recipe_root) != -1:
                 print(s['Key'].find(recipe_root))
                 summaries.append(
                     {'key':s['Key'].replace(recipe_root,''),
