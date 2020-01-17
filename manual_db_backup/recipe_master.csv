@@ -1,12 +1,13 @@
-id,recipe,style,notes
-247,IPA,American Amber Ale,Recipe Notes
-248,Dortmund Export,American Amber Ale,Recipe Notes
-249,Cream Ale,American Amber Ale,Recipe Notes
-250,Gose,Gueuze,Recipe Notes
-251,LP,American Amber Ale,Recipe Notes
-257,West Coast IPA,American IPA,Recipe Notes
-265,CB_Belgian Tripel,Belgian Tripel,Recipe Notes
-282,Belgian Tripel,Belgian Tripel,# Belgian Tripel
+id,recipe,style,notes,user_id
+247,IPA,American Amber Ale,Recipe Notes,1
+248,Dortmund Export,American Amber Ale,Recipe Notes,1
+249,Cream Ale,American Amber Ale,Recipe Notes,1
+250,Gose,Gueuze,Recipe Notes,1
+251,LP,American Amber Ale,Recipe Notes,1
+257,West Coast IPA,American IPA,Recipe Notes,1
+265,CB_Belgian Tripel,Belgian Tripel,Recipe Notes,19
+321,CB_Private Rye Brown Ale,RyePA,Recipe Notes,19
+282,Belgian Tripel,Belgian Tripel,'# Belgian Tripel
 
 > [BJCP Notes](https://www.bjcp.org/2008styles/style18.php#1c):
 
@@ -59,4 +60,5 @@ afsd
 
 <img style="transform: rotate(90deg);" src="https://thegratefulbrauer.s3.amazonaws.com/recipe_description_images/cbearce/recipes/IPA/shiloh%20green%20grass.jpg" alt="Smiley face" height="300" width="300">
 
-
+',1
+315,Beldeletegian Tripel,Belgian Tripel,'# Belgian Tripel',1

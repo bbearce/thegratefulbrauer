@@ -308,6 +308,9 @@ data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
 
 @app.route('/save')
 def save():
+
+    # Get user
+    user = models.User.query.filter_by(username = current_user.username)[0]
     
     # Common to all (in db: gb_recipe_system)
     recipe = request.args.get('recipe', 0, type=str)
@@ -344,7 +347,7 @@ def save():
         exec("{} = request.args.get('{}', 0, type=str)".format(c,c))
 
     # check if this already exists
-    Recipe = models.Recipe(recipe=recipe, style=style, notes=notes)
+    Recipe = models.Recipe(recipe=recipe, style=style, notes=notes, user_id=user.id)
     
     if(len(models.Recipe.query.filter_by(recipe=Recipe.recipe).all()) == 0):
         print("this recipe doesn't exist so we are adding it.")
@@ -352,16 +355,19 @@ def save():
         db.session.add(Recipe)
         db.session.commit()
         # System
-        system_string = "System = models.Recipe_System(recipe_id=Recipe.id,"
-        for s in system_columns:
+
+        system_string = "System = models.Recipe_System(user_id=user.id, recipe_id=Recipe.id,"
+        for s in system_columns[1:]:
             system_string = system_string + " {}={},".format(s,s)
 
-        system_string = system_string + ")"; exec(system_string)
+        system_string = system_string + ")";
+        exec(system_string)
+
         # Fermentables
         num_of_ingredients = 5
         for i in range(0,num_of_ingredients):
-            fermentables_string = "Fermentables{} = models.Recipe_Fermentables(recipe_id=Recipe.id,".format(i+1)
-            for fermentables in fermentables_columns:
+            fermentables_string = "Fermentables{} = models.Recipe_Fermentables(user_id=user.id, recipe_id=Recipe.id,".format(i+1)
+            for fermentables in fermentables_columns[1:]:
                 fermentables_string = fermentables_string + " {}={}{},".format(fermentables,fermentables,i+1)
             fermentables_string = fermentables_string + ")";
             exec(fermentables_string)
@@ -373,8 +379,8 @@ def save():
         # Hops
         num_of_ingredients = 3
         for i in range(0,num_of_ingredients):
-            hops_string = "Hops{} = models.Recipe_Hops(recipe_id=Recipe.id,".format(i+1)
-            for hops in hops_columns:
+            hops_string = "Hops{} = models.Recipe_Hops(user_id=user.id, recipe_id=Recipe.id,".format(i+1)
+            for hops in hops_columns[1:]:
                 hops_string = hops_string + " {}={}{},".format(hops,hops,i+1)
             hops_string = hops_string + ")"
             exec(hops_string)
@@ -383,36 +389,36 @@ def save():
         # Hops3 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop3, weight_oz=weight_oz3, boil_time_min=boil_time_min3,)
 
         # Mash
-        mash_string = "Mash = models.Recipe_Mash(recipe_id=Recipe.id,"
-        for m in mash_columns:
+        mash_string = "Mash = models.Recipe_Mash(user_id=user.id, recipe_id=Recipe.id,"
+        for m in mash_columns[1:]:
             mash_string = mash_string + " {}={},".format(m,m)
 
         mash_string = mash_string + ")"; exec(mash_string)
         
         # Yeast
-        yeast_string = "Yeast = models.Recipe_Yeast(recipe_id=Recipe.id,"
-        for y in yeast_columns:
+        yeast_string = "Yeast = models.Recipe_Yeast(user_id=user.id, recipe_id=Recipe.id,"
+        for y in yeast_columns[1:]:
             yeast_string = yeast_string + " {}={},".format(y,y)
 
         yeast_string = yeast_string + ")"; exec(yeast_string)
 
         # Water
-        water_string = "Water = models.Recipe_Water(recipe_id=Recipe.id,"
-        for w in water_columns:
+        water_string = "Water = models.Recipe_Water(user_id=user.id, recipe_id=Recipe.id,"
+        for w in water_columns[1:]:
             water_string = water_string + " {}={},".format(w,w)
 
         water_string = water_string + ")"; exec(water_string)
 
         # Fermentation
-        fermentation_string = "Fermentation = models.Recipe_Fermentation(recipe_id=Recipe.id,"
-        for fermentation in fermentation_columns:
+        fermentation_string = "Fermentation = models.Recipe_Fermentation(user_id=user.id, recipe_id=Recipe.id,"
+        for fermentation in fermentation_columns[1:]:
             fermentation_string = fermentation_string + " {}={},".format(fermentation,fermentation)
 
         fermentation_string = fermentation_string + ")"; exec(fermentation_string)
 
         # Chemistry
-        chemistry_string = "Chemistry = models.Recipe_Chemistry(recipe_id=Recipe.id,"
-        for c in chemistry_columns:
+        chemistry_string = "Chemistry = models.Recipe_Chemistry(user_id=user.id, recipe_id=Recipe.id,"
+        for c in chemistry_columns[1:]:
             chemistry_string = chemistry_string + " {}={},".format(c,c)
 
         chemistry_string = chemistry_string + ")"; exec(chemistry_string)
@@ -476,12 +482,10 @@ def brewculator():
     summaries = [{'key': 'None','last_modified':'None'}]
 
     if(len(objs)>1):
-        print("key exists")
         objects = s3_client.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
         summaries = []
         for s in objects['Contents']:
             if (s['Key'].find('.jpg') != -1 or s['Key'].find('.jpeg') != -1 or s['Key'].find('.JPG') != -1 or s['Key'].find('.PNG') != -1 or s['Key'].find('.png') != -1) and s['Key'].find(recipe_root) != -1:
-                print(s['Key'].find(recipe_root))
                 summaries.append(
                     {'key':s['Key'].replace(recipe_root,''),
                      'last_modified': s['LastModified']
@@ -489,7 +493,6 @@ def brewculator():
                 )
 
     else:
-        print("key doesn't exist, add this key")
         my_bucket = s3_resource.Bucket('thegratefulbrauer')
         my_bucket.put_object(Bucket='thegratefulbrauer', Body='', Key=recipe_root)
 
