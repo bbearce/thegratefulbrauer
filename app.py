@@ -306,45 +306,50 @@ data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
 
  
 
-@app.route('/save')
+@app.route('/save', methods=["POST"])
 def save():
 
     # Get user
     user = models.User.query.filter_by(username = current_user.username)[0]
     
+    print(request.form)
+    print(request.form.get('recipe', 0, type=str))
+    
     # Common to all (in db: gb_recipe_system)
-    recipe = request.args.get('recipe', 0, type=str)
-    style = request.args.get('style', 0, type=str)
-    notes = request.args.get('notes', 0, type=str)
+    recipe = request.form.get('recipe', 0, type=str)
+    print("RECIPE:",recipe)
+    style = request.form.get('style', 0, type=str)
+    print("STYLE:",style)
+    notes = request.form.get('notes', 0, type=str)
 
     # Grab all input values from html pages
     for s in system_columns:
-        exec("{} = request.args.get('{}', 0, type=str)".format(s,s))
+        exec("{} = request.form.get('{}', 0, type=str)".format(s,s))
 
     num_of_ingredients = 5
     for fermentables in fermentables_columns:
         for i in range(0,num_of_ingredients):
-            exec("{}{} = request.args.get('{}{}', 0, type=str)".format(fermentables,i+1,fermentables,i+1))
+            exec("{}{} = request.form.get('{}{}', 0, type=str)".format(fermentables,i+1,fermentables,i+1))
 
     num_of_ingredients = 3
     for h in hops_columns:
         for i in range(0,num_of_ingredients):
-            exec("{}{} = request.args.get('{}{}', 0, type=str)".format(h,i+1,h,i+1))
+            exec("{}{} = request.form.get('{}{}', 0, type=str)".format(h,i+1,h,i+1))
 
     for m in mash_columns:
-        exec("{} = request.args.get('{}', 0, type=str)".format(m,m))
+        exec("{} = request.form.get('{}', 0, type=str)".format(m,m))
 
     for y in yeast_columns:
-        exec("{} = request.args.get('{}', 0, type=str)".format(y,y))
+        exec("{} = request.form.get('{}', 0, type=str)".format(y,y))
 
     for w in water_columns:
-        exec("{} = request.args.get('{}', 0, type=str)".format(w,w))
+        exec("{} = request.form.get('{}', 0, type=str)".format(w,w))
 
     for fermentation in fermentation_columns:
-        exec("{} = request.args.get('{}', 0, type=str)".format(fermentation,fermentation))
+        exec("{} = request.form.get('{}', 0, type=str)".format(fermentation,fermentation))
 
     for c in chemistry_columns:
-        exec("{} = request.args.get('{}', 0, type=str)".format(c,c))
+        exec("{} = request.form.get('{}', 0, type=str)".format(c,c))
 
     # check if this already exists
     Recipe = models.Recipe(recipe=recipe, style=style, notes=notes, user_id=user.id)

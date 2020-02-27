@@ -6,8 +6,9 @@ $('#save').bind('click',
     var about = document.querySelector('input[name=about]');
     about.value = JSON.stringify(quill.getContents());
     var saved_string = JSON.stringify(quill.getContents()['ops']);
-    
-    $.getJSON($SCRIPT_ROOT + '/save', 
+
+    // $.getJSON($SCRIPT_ROOT + '/save', 
+    $.post($SCRIPT_ROOT + '/save', 
 
               {
                // Recipe
