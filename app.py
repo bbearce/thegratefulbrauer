@@ -432,7 +432,7 @@ def save():
         recipe = "that recipe already exists"
     
     # Get updated list of recipes 
-    Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.all()]
+    Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.filter_by(user_id = user.id).all()]
 
     return jsonify(recipe=recipe, Recipes=Recipes)
 
@@ -455,7 +455,8 @@ def delete():
         recipe = "that recipe does not exist"
 
     # Get updated list of recipes 
-    Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.all()]
+    user = models.User.query.filter_by(username = current_user.username)[0]
+    Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.filter_by(user_id = user.id).all()]
         
     return jsonify(recipe=recipe, Recipes=Recipes)
 
