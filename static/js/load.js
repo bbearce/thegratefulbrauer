@@ -135,7 +135,7 @@ $('#load').bind('click', function() {
     //// Rerun app calculations
 
     // Load Notes and set to HTML mode
-    convert_md_to_html()
+    // convert_md_to_html() --> Part of md to html
     
     // Fermentables
     refresh_fermentables()
