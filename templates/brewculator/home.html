@@ -29,14 +29,32 @@
     </div>
 
 
-
-    <div class='home-app-div'>
+    <!-- Old Notes -->
+<!--     <div class='home-app-div'>
         <button id=convert_md_to_html onclick="convert_md_to_html()">Toggle MD and HTML</button>
         <button id=upload_dialog onclick="toggle_image_upload()">Manage Img/Video Uploads</button>
         <textarea id='notes' name='notes' type="text" style="display: block;">Enter New Recipe Notes</textarea>
         <div id='output-html' style='display: none;'></div>
-    </div>
+    </div> -->
 
+
+    <!-- New Notes -->
+    <div class='home-app-div'>
+        <div id="form-container" class="container">
+            <form>
+            <div class="row form-group">
+                <label for="about">About me</label>
+                <input name="about" type="hidden">
+                <div id="editor-container">
+                <p>Take some notes here. :)</p>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary" type="submit">Save Profile</button>
+            </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Tool Bar -->
     <div class="fl-fl">

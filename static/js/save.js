@@ -1,13 +1,20 @@
 $(function() {
 $('#save').bind('click', 
   function() {
+    // Quill form preprocessing to be saved
+    // var form = document.querySelector('form'); // might not be needed
+    var about = document.querySelector('input[name=about]');
+    about.value = JSON.stringify(quill.getContents());
+    var saved_string = JSON.stringify(quill.getContents()['ops']);
+    
     $.getJSON($SCRIPT_ROOT + '/save', 
 
               {
                // Recipe
                recipe: $('input[name="recipe"]').val(),
                style: $('select[name="style"]').val(),
-               notes: $('textarea[name="notes"]').val(),
+               notes: saved_string, // from Quill above
+               // old -- > notes: $('textarea[name="notes"]').val(),
                
 
                // System Table

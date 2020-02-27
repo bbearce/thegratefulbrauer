@@ -157,7 +157,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-
+### NOT BEING USED ###
 # Upload file endpoint
 @app.route('/media_upload', methods=['POST'])
 def media_upload():
@@ -196,7 +196,7 @@ def media_upload():
 
     return redirect(url_for('brewculator')) 
 
-
+### NOT BEING USED ###
 # Delete file endpoint
 @app.route('/media_delete', methods=['POST'])
 def media_delete():
@@ -467,34 +467,36 @@ def brewculator():
     # Get user    
     user = models.User.query.filter_by(username = current_user.username)[0]
 
-    recipe_root = 'recipe_description_images/'+user.username+'/recipes/'
 
-    # load S3 images for current user
-    # Let's use Amazon S3: cleint and resource have different actions and abilities
-    s3_client = boto3.client('s3')
-    s3_resource = boto3.resource('s3')
+    ### NOT BEING USED ### -- this is the code to link to AWS
+    # recipe_root = 'recipe_description_images/'+user.username+'/recipes/'
+
+    # # load S3 images for current user
+    # # Let's use Amazon S3: cleint and resource have different actions and abilities
+    # s3_client = boto3.client('s3')
+    # s3_resource = boto3.resource('s3')
     
-    s3_resource = boto3.resource('s3')
-    bucket = s3_resource.Bucket('thegratefulbrauer')
-    objs = list(bucket.objects.filter(Prefix=recipe_root))
+    # s3_resource = boto3.resource('s3')
+    # bucket = s3_resource.Bucket('thegratefulbrauer')
+    # objs = list(bucket.objects.filter(Prefix=recipe_root))
 
-    # This will be the default value unless other objects are found
-    summaries = [{'key': 'None','last_modified':'None'}]
+    # # This will be the default value unless other objects are found
+    # summaries = [{'key': 'None','last_modified':'None'}]
 
-    if(len(objs)>1):
-        objects = s3_client.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
-        summaries = []
-        for s in objects['Contents']:
-            if (s['Key'].find('.jpg') != -1 or s['Key'].find('.jpeg') != -1 or s['Key'].find('.JPG') != -1 or s['Key'].find('.PNG') != -1 or s['Key'].find('.png') != -1) and s['Key'].find(recipe_root) != -1:
-                summaries.append(
-                    {'key':s['Key'].replace(recipe_root,''),
-                     'last_modified': s['LastModified']
-                    }
-                )
+    # if(len(objs)>1):
+    #     objects = s3_client.list_objects_v2(Bucket='thegratefulbrauer', StartAfter=recipe_root)    
+    #     summaries = []
+    #     for s in objects['Contents']:
+    #         if (s['Key'].find('.jpg') != -1 or s['Key'].find('.jpeg') != -1 or s['Key'].find('.JPG') != -1 or s['Key'].find('.PNG') != -1 or s['Key'].find('.png') != -1) and s['Key'].find(recipe_root) != -1:
+    #             summaries.append(
+    #                 {'key':s['Key'].replace(recipe_root,''),
+    #                  'last_modified': s['LastModified']
+    #                 }
+    #             )
 
-    else:
-        my_bucket = s3_resource.Bucket('thegratefulbrauer')
-        my_bucket.put_object(Bucket='thegratefulbrauer', Body='', Key=recipe_root)
+    # else:
+    #     my_bucket = s3_resource.Bucket('thegratefulbrauer')
+    #     my_bucket.put_object(Bucket='thegratefulbrauer', Body='', Key=recipe_root)
 
 
 
@@ -578,7 +580,7 @@ def brewculator():
     hcolumns = [[j for j in i] for i in hcolumns] # Python3 has zips as generators so I have to convert
 
     return render_template('/brewculator/brewculator.html',
-                           User = user.username, Files=summaries,
+                           User = user.username,     # Files=summaries, --> from AWS
                            Data = json.dumps(data),
                            Recipes=Recipes,
                            Styles = Styles,

@@ -20,7 +20,9 @@ $('#load').bind('click', function() {
 
     // Recipe
     $('select[name="style"]').val(loaded_data['data']['Recipe']['gb_recipe_master']['style'])
-    $('textarea[name="notes"]').val(loaded_data['data']['Recipe']['gb_recipe_master']['notes'])
+    var loaded_string = JSON.parse(loaded_data['data']['Recipe']['gb_recipe_master']['notes'])
+    quill.setContents(loaded_string)
+    // old -- > $('textarea[name="notes"]').val(loaded_data['data']['Recipe']['gb_recipe_master']['notes'])
 
     // System
     $('input[name="batch_size"]').val(loaded_data['data']['Recipe']['gb_recipe_system']['batch_size'])
