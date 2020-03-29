@@ -1,0 +1,43 @@
+id,recipe_id,hop,weight_oz,boil_time_min,user_id
+442,250,Northwest Golding,1.0,1,1
+443,250,Northwest Golding,1.0,1,1
+444,250,Northwest Golding,1.0,1,1
+445,251,Northwest Golding,1.0,1,1
+446,251,Northwest Golding,1.0,1,1
+447,251,Northwest Golding,1.0,1,1
+463,257,Chinook,1.0,50,1
+464,257,Cascade (U.S.),1.0,20,1
+465,257,Simcoe,1.0,5,1
+487,265,Northern Brewer (German),1.0,60,19
+488,265,Goldings (U.S.),0.5,5,19
+489,265,None,0.0,0,19
+589,321,Columbus,0.5,60,19
+590,321,East Kent Goldings,1.0,10,19
+591,321,None,0.0,0,19
+433,247,Northwest Golding,1.0,1,1
+434,247,Northwest Golding,1.0,1,1
+435,247,Northwest Golding,1.0,1,1
+436,248,Northwest Golding,1.0,1,1
+437,248,Northwest Golding,1.0,1,1
+438,248,Northwest Golding,1.0,1,1
+766,390,Perle (German),1.0,60,19
+767,390,Perle (German),1.0,30,19
+768,390,Hersbrucker,1.0,15,19
+775,393,Columbus,0.25,60,1
+776,393,None,1.0,1,1
+777,393,None,1.0,1,1
+439,249,Northwest Golding,1.0,1,1
+440,249,Northwest Golding,1.0,1,1
+441,249,Northwest Golding,1.0,1,1
+622,340,Styrian Golding,1.25,60,1
+623,340,Styrian Golding,0.5,15,1
+624,340,None,0.0,0,1
+634,344,Challenger,1.0,90,22
+635,344,Styrian Golding,1.5,90,22
+636,344,Styrian Golding,0.5,15,22
+640,346,Belma,1.0,1,22
+641,346,None,1.0,1,22
+642,346,None,1.0,1,22
+652,350,Perle (German),1.0,60,19
+653,350,Hallertau (German),1.0,5,19
+654,350,None,1.0,1,19

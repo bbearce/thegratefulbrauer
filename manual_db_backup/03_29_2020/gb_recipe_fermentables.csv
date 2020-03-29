@@ -1,0 +1,71 @@
+id,recipe_id,ingredient,weight_lbs,user_id
+714,250,"Wheat Malt, White (Rahr)",5.6,1
+715,250,"Pilsner, German (Saltzgitter)",3.75,1
+716,250,0 - None,0.0,1
+717,250,0 - None,0.0,1
+718,250,0 - None,0.0,1
+719,251,2-Row Malt (Rahr),10.0,1
+992,340,"Pilsner, German (Saltzgitter)",12.5,1
+720,251,2-Row Brewers Malt (Briess),4.0,1
+721,251,0 - None,0.0,1
+722,251,0 - None,0.0,1
+723,251,0 - None,0.0,1
+993,340,"Munich, Dark (Schill)",0.75,1
+994,340,"Candi Sugar, Blonde (Soft)",2.0,1
+995,340,0 - None,0.0,1
+996,340,0 - None,0.0,1
+1012,344,Pilsner (Rahr),12.5,22
+749,257,2-Row Malt (Rahr),10.0,1
+750,257,Caramel_40 (Briess),0.75,1
+751,257,0 - None,0.0,1
+752,257,0 - None,0.0,1
+1013,344,"Munich, Dark (Schill)",0.75,22
+1014,344,"Candi Syrup, Clear",2.0,22
+1015,344,0 - None,0.0,22
+1016,344,0 - None,0.0,22
+1022,346,2-Row Malt (Rahr),12.0,22
+753,257,0 - None,0.0,1
+937,321,Pale Ale Malt (Briess),9.0,19
+938,321,Rye Malt (Weyermann),1.0,19
+939,321,Chocolate Rye (Weyermann),0.25,19
+940,321,"Crystal, Medium (Simpsons)",0.25,19
+941,321,Special Roast (Briess),0.25,19
+699,247,0 - None,0.0,1
+700,247,0 - None,0.0,1
+701,247,0 - None,0.0,1
+702,247,0 - None,0.0,1
+703,247,0 - None,0.0,1
+1023,346,Caramel_40 (Briess),1.0,22
+1024,346,0 - None,0.0,22
+1025,346,0 - None,0.0,22
+1026,346,0 - None,0.0,22
+704,248,0 - None,0.0,1
+705,248,0 - None,0.0,1
+706,248,0 - None,0.0,1
+707,248,0 - None,0.0,1
+708,248,0 - None,0.0,1
+709,249,0 - None,0.0,1
+710,249,0 - None,0.0,1
+711,249,0 - None,0.0,1
+712,249,0 - None,0.0,1
+713,249,0 - None,0.0,1
+789,265,2-Row Malt (Rahr),9.0,19
+790,265,Pilsen (Franco-Belges),5.0,19
+791,265,"Candi Sugar, Blonde (Soft)",1.0,19
+792,265,CaraAroma (Weyermann),0.125,19
+793,265,CaraAmber (Weyermann),0.125,19
+1232,390,Munich (Best Malz),4.0,19
+1233,390,"Munich, Dark (Schill)",2.0,19
+1234,390,Pilsen (Best Malz),3.5,19
+1235,390,CaraMunich II (Weyermann),0.5,19
+1236,390,0 - None,0.0,19
+1247,393,Briess - CBW® Golden Light DME,1.65,1
+1248,393,0 - None,0.0,1
+1249,393,0 - None,0.0,1
+1250,393,0 - None,0.0,1
+1251,393,0 - None,0.0,1
+1042,350,"Pilsner, German (Saltzgitter)",10.0,19
+1043,350,"Wheat, Dark (Weyermann)",2.0,19
+1044,350,Carafa III (Weyermann),0.75,19
+1045,350,Caramel_60 (Briess),0.25,19
+1046,350,0 - None,0.0,19

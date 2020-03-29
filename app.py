@@ -585,6 +585,10 @@ def brewculator():
     hcolumns = [zip(hops_columns,[i]*(len(hops_columns)+1)) for i in range(1,num_of_inputs+1)]
     hcolumns = [[j for j in i] for i in hcolumns] # Python3 has zips as generators so I have to convert
 
+    print(type(Yeast[0]))
+    print(yeast_columns)
+    print(mash_columns)
+
     return render_template('/brewculator/brewculator.html',
                            User = user.username,     # Files=summaries, --> from AWS
                            Data = json.dumps(data),
