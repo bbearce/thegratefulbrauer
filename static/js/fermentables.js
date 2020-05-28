@@ -1,11 +1,26 @@
 
-function calc_percent_of_total() {
+function calc_percent_of_total(for_water=false) {
 
     // Grab weights and calculate total weight
     fermentable_weights = [];
     total = 0;
+    total_for_water = 0;
     for (i = 1; i < 6; i++) { 
-        fermentable_weights.push(document.getElementsByName('weight_lbs'+String(i))[0].value)
+        
+        // Left off somewhere in here as total_for_water isn't registering 
+        // double check fermentation graph is working
+        Data.Constants.gb_constants_fermentables.forEach((j,v,a) => {
+            console.log(j+1)
+            if (v.ingredients === document.getElementsByName('ingredient'+String(j+1))[0].value) {
+                if (v.is_grain === 1) { // check for is_grain or not
+                    console.log(parseFloat(fermentable_weights[j]))
+                    total_for_water += parseFloat(fermentable_weights[j])
+                }
+            }
+            
+        });
+
+        fermentable_weights.push(document.getElementsByName('weight_lbs'+String(i))[0].value)        
         total += parseFloat(fermentable_weights[i-1])
     }
 
@@ -16,7 +31,11 @@ function calc_percent_of_total() {
         percent_of_totals.push(100*fermentable_weights[i]/total)
     }
 
-    return total;
+    if (for_water === true) {
+        return total_for_water;
+    }else {
+        return total;
+    }
 
 }
 

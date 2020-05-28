@@ -89,22 +89,39 @@ $('#save').bind('click',
                days5: $('input[name="days5"]').val(),
                temp5: $('input[name="temp5"]').val(),
 
-               // Chemistry
+               // Chemistry -- needs some additions
                init_Ca: $('input[name="init_Ca"]').val(),
                init_Mg: $('input[name="init_Mg"]').val(),
                init_Na: $('input[name="init_Na"]').val(),
                init_Cl: $('input[name="init_Cl"]').val(),
                init_SO4: $('input[name="init_SO4"]').val(),
                init_HCO3_CaCO3: $('input[name="init_HCO3_CaCO3"]').val(),
-               actual_ph: $('input[name="actual_ph"]').val(),
-               effective_alkalinity: $('input[name="effective_alkalinity"]').val(),
-               residual_alkalinity: $('input[name="residual_alkalinity"]').val(),
-               ph_down_gypsum_CaSO4: $('input[name="ph_down_gypsum_CaSO4"]').val(),
-               ph_down_cal_chl_CaCl2: $('input[name="ph_down_cal_chl_CaCl2"]').val(),
-               ph_down_epsom_salt_MgSO4: $('input[name="ph_down_epsom_salt_MgSO4"]').val(),
-               ph_up_slaked_lime_CaOH2: $('input[name="ph_up_slaked_lime_CaOH2"]').val(),
-               ph_up_baking_soda_NaHCO3: $('input[name="ph_up_baking_soda_NaHCO3"]').val(),
-               ph_up_chalk_CaCO3: $('input[name="ph_up_chalk_CaCO3"]').val(),
+               mash_distilled_percent : $("input[name='mash_distilled_percent']").val(),
+               sparge_distilled_percent : $("input[name='sparge_distilled_percent']").val(),
+               acidulated_malt_percent : $("input[name='acidulated_malt_percent']").val(),
+               lactic_acid_percent : $("input[name='lactic_acid_percent']").val(),
+               acidulated_malt_oz : $("input[name='acidulated_malt_oz']").val(),
+               lactic_acid_ml : $("input[name='lactic_acid_ml']").val(),
+               actual_ph: $('#estimated_ph')[0].innerHTML, // where is this? --> $('input[name="actual_ph"]').val(),
+               effective_alkalinity: $('#effective_alkalinity')[0].innerHTML,
+               residual_alkalinity: $('#residual_alkalinity')[0].innerHTML,
+               // Mash pH_down
+               ph_down_gypsum_CaSO4 : $("input[name='mash_ph_down_gypsum_CaSO4']").val(),
+               ph_down_cal_chl_CaCl2 : $("input[name='mash_ph_down_cal_chl_CaCl2']").val(),
+               ph_down_epsom_salt_MgSO4 : $("input[name='mash_ph_down_epsom_salt_MgSO4']").val(),
+               // Mash pH_up
+               ph_up_slaked_lime_CaOH2 : $("input[name='mash_ph_up_slaked_lime_CaOH2']").val(),
+               ph_up_baking_soda_NaHCO3 : $("input[name='mash_ph_up_baking_soda_NaHCO3']").val(),
+               ph_up_chalk_CaCO3 : $("input[name='mash_ph_up_chalk_CaCO3']").val(),
+               // Sparge pH_down - not in DB table yet
+               //sparge_ph_down_gypsum_CaSO4 : parseFloat($("input[name='sparge_ph_down_gypsum_CaSO4']")[0].value)
+               //sparge_ph_down_cal_chl_CaCl2 : parseFloat($("input[name='sparge_ph_down_cal_chl_CaCl2']")[0].value)
+               //sparge_ph_down_epsom_salt_MgSO4 : parseFloat($("input[name='sparge_ph_down_epsom_salt_MgSO4']")[0].value)
+               // Sparge pH_up - not in DB table yet
+               //sparge_ph_up_slaked_lime_CaOH2 : parseFloat($("input[name='sparge_ph_up_slaked_lime_CaOH2']")[0].value)
+               //sparge_ph_up_baking_soda_NaHCO3 : parseFloat($("input[name='sparge_ph_up_baking_soda_NaHCO3']")[0].value)
+               //sparge_ph_up_chalk_CaCO3 : parseFloat($("input[name='sparge_ph_up_chalk_CaCO3']")[0].value)
+
 
 
 
@@ -112,10 +129,11 @@ $('#save').bind('click',
 
               function(data) {
 
-              if (data['recipe'] == "that recipe already exists") {
+              if (data['recipe'] == "that recipe already exists") { // this if else should just be the else block
                   // CHANGE to alert
                   $("#messages").text("That recipe already exists, please try another name")
-              } else { 
+              } else {
+                $("#messages").text("Just saved recipe: "+data['recipe'])
                   Recipes = data['Recipes']
                   var recipe_load_select_input = document.getElementById("recipe_load");
                   var recipe_delete_select_input = document.getElementById("recipe_delete");

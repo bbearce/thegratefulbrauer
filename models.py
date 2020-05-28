@@ -166,6 +166,16 @@ class Recipe_System(db.Model):
 
     def __repr__(self):
         return '<System for recipe_id: %r>' % self.recipe_id
+    
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'batch_size': self.batch_size,
+            'extraction_efficiency': self.extraction_efficiency,
+        }
 
 class Recipe_Fermentables(db.Model):
     __tablename__ = 'gb_recipe_fermentables'
@@ -177,6 +187,16 @@ class Recipe_Fermentables(db.Model):
 
     def __repr__(self):
         return '<Fermentable: %r>' % self.ingredient
+
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'ingredient': self.ingredient,
+            'weight_lbs': self.weight_lbs,
+        }
 
 class Recipe_Hops(db.Model):
     __tablename__ = 'gb_recipe_hops'
@@ -191,6 +211,17 @@ class Recipe_Hops(db.Model):
     def __repr__(self):
         return '<Hop: %r>' % self.hop
 
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'hop': self.hop,
+            'weight_oz': self.weight_oz,
+            'boil_time_min': self.boil_time_min,
+        }
+
 class Recipe_Mash(db.Model):
     __tablename__ = 'gb_recipe_mash'
     id = db.Column(db.Integer, primary_key=True)
@@ -204,6 +235,18 @@ class Recipe_Mash(db.Model):
     def __repr__(self):
         return '<Mash for recipe_id: %r>' % self.recipe_id
 
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'init_grain_temp': self.init_grain_temp,
+            'sacc_rest_temp': self.sacc_rest_temp,
+            'mash_duration': self.mash_duration,
+            'mash_thickness': self.mash_thickness,
+        }
+
 class Recipe_Yeast(db.Model):
     __tablename__ = 'gb_recipe_yeast'
     id = db.Column(db.Integer, primary_key=True)
@@ -214,6 +257,16 @@ class Recipe_Yeast(db.Model):
 
     def __repr__(self):
         return '<Yeast: %r>' % self.yeast_name
+
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'yeast_name': self.yeast_name,
+            'init_cells': self.init_cells,
+        }
 
 class Recipe_Water(db.Model):
     __tablename__ = 'gb_recipe_water'
@@ -229,10 +282,24 @@ class Recipe_Water(db.Model):
     fermentation_tank_loss = db.Column(db.Float)
     grain_abs_factor = db.Column(db.Float)
     
-
-
     def __repr__(self):
         return '<Water for recipe_id: %r>' % self.recipe_id
+
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'total_boil_time': self.total_boil_time,
+            'evap_rate': self.evap_rate,
+            'shrinkage': self.shrinkage,
+            'mash_tun_dead_space': self.mash_tun_dead_space,
+            'lauter_tun_dead_space': self.lauter_tun_dead_space,
+            'kettle_dead_space': self.kettle_dead_space,
+            'fermentation_tank_loss': self.fermentation_tank_loss,
+            'grain_abs_factor': self.grain_abs_factor,
+        }
 
 class Recipe_Fermentation(db.Model):
     __tablename__ = 'gb_recipe_fermentation'
@@ -253,6 +320,25 @@ class Recipe_Fermentation(db.Model):
 
     def __repr__(self):
         return '<Fermentation for recipe_id: %r>' % self.recipe_id
+
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'days1': self.days1,
+            'temp1': self.temp1,
+            'days2': self.days2,
+            'temp2': self.temp2,
+            'days3': self.days3,
+            'temp3': self.temp3,
+            'days4': self.days4,
+            'temp4': self.temp4,
+            'days5': self.days5,
+            'temp5': self.temp5,
+        }
+
 
 
 class Recipe_Chemistry(db.Model):
@@ -279,7 +365,26 @@ class Recipe_Chemistry(db.Model):
     def __repr__(self):
         return '<Chemistry for recipe_id: %r>' % self.recipe_id
 
-
-
-
+    def serialize(self):
+        """Return object data in easily serializable format"""
+        return {
+            'id' : self.id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
+            'init_Ca' : self.init_Ca,
+            'init_Mg' : self.init_Mg,
+            'init_Na' : self.init_Na,
+            'init_Cl' : self.init_Cl,
+            'init_SO4' : self.init_SO4,
+            'init_HCO3_CaCO3' : self.init_HCO3_CaCO3,
+            'actual_ph' : self.actual_ph,
+            'effective_alkalinity' : self.effective_alkalinity,
+            'residual_alkalinity' : self.residual_alkalinity,
+            'ph_down_gypsum_CaSO4' : self.ph_down_gypsum_CaSO4,
+            'ph_down_cal_chl_CaCl2' : self.ph_down_cal_chl_CaCl2,
+            'ph_down_epsom_salt_MgSO4' : self.ph_down_epsom_salt_MgSO4,
+            'ph_up_slaked_lime_CaOH2' : self.ph_up_slaked_lime_CaOH2,
+            'ph_up_baking_soda_NaHCO3' : self.ph_up_baking_soda_NaHCO3,
+            'ph_up_chalk_CaCO3' : self.ph_up_chalk_CaCO3,
+        }
 

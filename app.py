@@ -321,121 +321,114 @@ def save():
     style = request.form.get('style', 0, type=str)
     print("STYLE:",style)
     notes = request.form.get('notes', 0, type=str)
-
     # Grab all input values from html pages
-    for s in system_columns:
-        exec("{} = request.form.get('{}', 0, type=str)".format(s,s))
-
-    num_of_ingredients = 5
-    for fermentables in fermentables_columns:
-        for i in range(0,num_of_ingredients):
-            exec("{}{} = request.form.get('{}{}', 0, type=str)".format(fermentables,i+1,fermentables,i+1))
-
-    num_of_ingredients = 3
-    for h in hops_columns:
-        for i in range(0,num_of_ingredients):
-            exec("{}{} = request.form.get('{}{}', 0, type=str)".format(h,i+1,h,i+1))
-
-    for m in mash_columns:
-        exec("{} = request.form.get('{}', 0, type=str)".format(m,m))
-
-    for y in yeast_columns:
-        exec("{} = request.form.get('{}', 0, type=str)".format(y,y))
-
-    for w in water_columns:
-        exec("{} = request.form.get('{}', 0, type=str)".format(w,w))
-
-    for fermentation in fermentation_columns:
-        exec("{} = request.form.get('{}', 0, type=str)".format(fermentation,fermentation))
-
-    for c in chemistry_columns:
-        exec("{} = request.form.get('{}', 0, type=str)".format(c,c))
-
     # check if this already exists
-    Recipe = models.Recipe(recipe=recipe, style=style, notes=notes, user_id=user.id)
-    
-    if(len(models.Recipe.query.filter_by(recipe=Recipe.recipe).all()) == 0):
-        print("this recipe doesn't exist so we are adding it.")
+    does_recipe_exist = True if len(models.Recipe.query.filter_by(recipe=recipe).all()) != 0 else False # flipped the == to != for new save
+    if(does_recipe_exist):
+        Recipe = models.Recipe.query.filter_by(recipe=recipe).first()
+        # Recipe = models.Recipe(id=Recipe.id,recipe=recipe, style=style, notes=notes, user_id=user.id)
+        # Get recipe records for an update
+        # system_id = models.Recipe_System.query.filter_by(recipe_id=Recipe.id).first()
+        # fermentables_ids = models.Recipe_Fermentables.query.filter_by(recipe_id=Recipe.id).all()
+        # hops_ids = models.Recipe_Hops.query.filter_by(recipe_id=Recipe.id).all()
+        # mash_id = models.Recipe_Mash.query.filter_by(recipe_id=Recipe.id).first()
+        # yeast_id = models.Recipe_Yeast.query.filter_by(recipe_id=Recipe.id).first()
+        # water_id = models.Recipe_Water.query.filter_by(recipe_id=Recipe.id).first()
+        # fermentation_id = models.Recipe_Fermentation.query.filter_by(recipe_id=Recipe.id).first()
+        # chemistry_id = models.Recipe_Chemistry.query.filter_by(recipe_id=Recipe.id).first()
+        System = models.Recipe_System.query.filter_by(recipe_id=Recipe.id).first()
+        Fermentables = models.Recipe_Fermentables.query.filter_by(recipe_id=Recipe.id).all()
+        Hops = models.Recipe_Hops.query.filter_by(recipe_id=Recipe.id).all()
+        Mash = models.Recipe_Mash.query.filter_by(recipe_id=Recipe.id).first()
+        Yeast = models.Recipe_Yeast.query.filter_by(recipe_id=Recipe.id).first()
+        Water = models.Recipe_Water.query.filter_by(recipe_id=Recipe.id).first()
+        Fermentation = models.Recipe_Fermentation.query.filter_by(recipe_id=Recipe.id).first()
+        Chemistry = models.Recipe_Chemistry.query.filter_by(recipe_id=Recipe.id).first()
+        # print("this recipe doesn't exist so we are adding it.") # comment out to fix save
+        # recipe_columns = [col.key for col in models.Recipe.__table__.columns]
+        # for col in recipe_columns:
+        #     if col not in ['id', 'user_id']:
+        #         Recipe.__setattr__(col, request.form.get(col, 'attribute not found', type=str))
+        
+        # System
+        # request.form
+        # [i for i in request.form.keys()]
 
+        def update_record(record=None, record_number=1):
+            record_columns = [col.key for col in record.__table__.columns]
+            for col in record_columns:
+                cols_not_update = ['id', 'user_id'] if record.__tablename__ == 'gb_recipe_master' else ['id', 'user_id', 'recipe_id']
+                if col not in cols_not_update:
+                    if record.__tablename__ in ['gb_recipe_fermentables', 'gb_recipe_hops']:
+                        record.__setattr__(col, request.form.get(col+str(record_number), 'attribute not found', type=str))
+                    else:
+                        record.__setattr__(col, request.form.get(col, 'attribute not found', type=str))        
+
+        def update_record_or_list_of_records(record_or_list_of_records=None):
+            if isinstance(record_or_list_of_records, list): 
+                # looking for fermentables or hops tables: 
+                # ie... table.__tablename__ in ['gb_recipe_fermentable','gb_recipe_hops']:
+                # but those come wtih multiple records we must loop through
+                for key, record in enumerate(record_or_list_of_records, 1):
+                    update_record(record=record, record_number=key)
+            else:
+                update_record(record_or_list_of_records)
+
+        update_record_or_list_of_records(Recipe)
+        update_record_or_list_of_records(System)
+        update_record_or_list_of_records(Fermentables)
+        update_record_or_list_of_records(Hops)
+        update_record_or_list_of_records(Mash)
+        update_record_or_list_of_records(Yeast)
+        update_record_or_list_of_records(Water)
+        update_record_or_list_of_records(Chemistry)
+        db.session.commit()
+    else:
+        Recipe = models.Recipe(recipe=recipe, style=style, notes=notes, user_id=user.id)
         db.session.add(Recipe)
         db.session.commit()
-        # System
+        def save_record(record=None, record_number=1):
+            record_columns = [col.key for col in record.__table__.columns]
+            for col in record_columns:
+                cols_not_update = ['id', 'user_id', 'recipe_id']
+                if col not in cols_not_update:
+                    if record.__tablename__ in ['gb_recipe_fermentables', 'gb_recipe_hops']:
+                        # pdb.set_trace()
+                        record.__setattr__(col, request.form.get(col+str(record_number), 'attribute not found', type=str))
+                    else:
+                        record.__setattr__(col, request.form.get(col, 'attribute not found', type=str))
+        def save_record_or_list_of_records(record_or_list_of_records=None):
+            if isinstance(record_or_list_of_records, list): 
+                # looking for fermentables or hops tables: 
+                # ie... table.__tablename__ in ['gb_recipe_fermentable','gb_recipe_hops']:
+                # but those come wtih multiple records we must loop through
+                for key, record in enumerate(record_or_list_of_records, 1):
+                    save_record(record=record, record_number=key)
+            else:
+                save_record(record_or_list_of_records)
 
-        system_string = "System = models.Recipe_System(user_id=user.id, recipe_id=Recipe.id,"
-        for s in system_columns[1:]:
-            system_string = system_string + " {}={},".format(s,s)
+        System = models.Recipe_System(user_id=user.id, recipe_id=Recipe.id)
+        Fermentables = [models.Recipe_Fermentables(user_id=user.id, recipe_id=Recipe.id) for record in range(1,5+1)]
+        Hops = [models.Recipe_Hops(user_id=user.id, recipe_id=Recipe.id) for record in range(1,3+1)]
+        Mash = models.Recipe_Mash(user_id=user.id, recipe_id=Recipe.id)
+        Yeast = models.Recipe_Yeast(user_id=user.id, recipe_id=Recipe.id)
+        Water = models.Recipe_Water(user_id=user.id, recipe_id=Recipe.id)
+        Fermentation = models.Recipe_Fermentation(user_id=user.id, recipe_id=Recipe.id)
+        Chemistry = models.Recipe_Chemistry(user_id=user.id, recipe_id=Recipe.id)
 
-        system_string = system_string + ")";
-        exec(system_string)
+        # save_record_or_list_of_records(Recipe)
+        save_record_or_list_of_records(System)
+        save_record_or_list_of_records(Fermentables)
+        save_record_or_list_of_records(Hops)
+        save_record_or_list_of_records(Mash)
+        save_record_or_list_of_records(Yeast)
+        save_record_or_list_of_records(Water)
+        save_record_or_list_of_records(Fermentation)
+        save_record_or_list_of_records(Chemistry)
 
-        # Fermentables
-        num_of_ingredients = 5
-        for i in range(0,num_of_ingredients):
-            fermentables_string = "Fermentables{} = models.Recipe_Fermentables(user_id=user.id, recipe_id=Recipe.id,".format(i+1)
-            for fermentables in fermentables_columns[1:]:
-                fermentables_string = fermentables_string + " {}={}{},".format(fermentables,fermentables,i+1)
-            fermentables_string = fermentables_string + ")";
-            exec(fermentables_string)
-        # Fermentables1 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient1, weight_lbs=weight_lbs1,)
-        # Fermentables2 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient2, weight_lbs=weight_lbs2,)
-        # Fermentables3 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient3, weight_lbs=weight_lbs3,)
-        # Fermentables4 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient4, weight_lbs=weight_lbs4,)
-        # Fermentables5 = models.Recipe_Fermentables(recipe_id=Recipe.id, ingredient=ingredient5, weight_lbs=weight_lbs5,)
-        # Hops
-        num_of_ingredients = 3
-        for i in range(0,num_of_ingredients):
-            hops_string = "Hops{} = models.Recipe_Hops(user_id=user.id, recipe_id=Recipe.id,".format(i+1)
-            for hops in hops_columns[1:]:
-                hops_string = hops_string + " {}={}{},".format(hops,hops,i+1)
-            hops_string = hops_string + ")"
-            exec(hops_string)
-        # Hops1 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop1, weight_oz=weight_oz1, boil_time_min=boil_time_min1,)
-        # Hops2 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop2, weight_oz=weight_oz2, boil_time_min=boil_time_min2,)
-        # Hops3 = models.Recipe_Hops(recipe_id=Recipe.id, hop=hop3, weight_oz=weight_oz3, boil_time_min=boil_time_min3,)
+    db.session.add_all(Fermentables + Hops + [Mash, Water, Fermentation, Yeast, Chemistry, System])
+    db.session.commit()
 
-        # Mash
-        mash_string = "Mash = models.Recipe_Mash(user_id=user.id, recipe_id=Recipe.id,"
-        for m in mash_columns[1:]:
-            mash_string = mash_string + " {}={},".format(m,m)
-
-        mash_string = mash_string + ")"; exec(mash_string)
-        
-        # Yeast
-        yeast_string = "Yeast = models.Recipe_Yeast(user_id=user.id, recipe_id=Recipe.id,"
-        for y in yeast_columns[1:]:
-            yeast_string = yeast_string + " {}={},".format(y,y)
-
-        yeast_string = yeast_string + ")"; exec(yeast_string)
-
-        # Water
-        water_string = "Water = models.Recipe_Water(user_id=user.id, recipe_id=Recipe.id,"
-        for w in water_columns[1:]:
-            water_string = water_string + " {}={},".format(w,w)
-
-        water_string = water_string + ")"; exec(water_string)
-
-        # Fermentation
-        fermentation_string = "Fermentation = models.Recipe_Fermentation(user_id=user.id, recipe_id=Recipe.id,"
-        for fermentation in fermentation_columns[1:]:
-            fermentation_string = fermentation_string + " {}={},".format(fermentation,fermentation)
-
-        fermentation_string = fermentation_string + ")"; exec(fermentation_string)
-
-        # Chemistry
-        chemistry_string = "Chemistry = models.Recipe_Chemistry(user_id=user.id, recipe_id=Recipe.id,"
-        for c in chemistry_columns[1:]:
-            chemistry_string = chemistry_string + " {}={},".format(c,c)
-
-        chemistry_string = chemistry_string + ")"; exec(chemistry_string)
-
-        exec("Fermentables = [Fermentables1, Fermentables2, Fermentables3, Fermentables4, Fermentables5]")
-        exec("Hops = [Hops1, Hops2, Hops3]")
-        exec("db.session.add_all(Fermentables + Hops + [Mash, Water, Fermentation, Yeast, Chemistry, System])")
-        exec("db.session.commit()")
-
-    else:
-        recipe = "that recipe already exists"
-    
     # Get updated list of recipes 
     Recipes = [recipe_name.recipe for recipe_name in models.Recipe.query.filter_by(user_id = user.id).all()]
 

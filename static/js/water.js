@@ -15,7 +15,7 @@ function get_water_info(){
 
     get_mash_info()
     // We have these variables after calling get_mash_info
-    // total_grains = calc_percent_of_total()
+    total_grains = calc_percent_of_total(for_water=true)
     // mash_volume = total*(mash_thickness/4) // Convert to [Gal] for mash_thickness
     // infusion_temp = (0.2/mash_thickness)*(sacc_rest_temp-init_grain_temp)+sacc_rest_temp
     // mash_out_volume = ((0.2*total_grains)+(mash_volume_qts))*(((mash_protein_rest_temp-sacc_rest_temp)/(210-mash_protein_rest_temp))/4)
