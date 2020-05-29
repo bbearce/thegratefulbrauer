@@ -502,12 +502,12 @@ def brewculator():
 
 
 
-            
+    
     # Get fermentables (not recipe values but constants)
     Recipes = models.Recipe.query.filter_by(user_id = user.id).all()
     Styles = models.Styles.query.order_by('styles').all()
-    Fermentables = models.Fermentables.query.all()
-    Hops = models.Hops.query.all()
+    Fermentables = models.Fermentables.query.order_by(models.Fermentables.id).all()
+    Hops = models.Hops.query.order_by(models.Hops.id).all()
     Yeast = models.Yeast.query.all()
     gcc = models.gravity_correction_chart.query.all()
     ut = models.utilization_table.query.all()
@@ -581,7 +581,7 @@ def brewculator():
     print(type(Yeast[0]))
     print(yeast_columns)
     print(mash_columns)
-
+    
     return render_template('/brewculator/brewculator.html',
                            User = user.username,     # Files=summaries, --> from AWS
                            Data = json.dumps(data),
