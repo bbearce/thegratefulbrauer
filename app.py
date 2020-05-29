@@ -301,7 +301,7 @@ data['Recipe']['gb_recipe_water'] = water_dict
 data['Recipe']['gb_recipe_fermentation'] = fermentation_dict
 data['Recipe']['gb_recipe_chemistry'] = chemistry_dict
     """)
-
+    # pdb.set_trace()
     return jsonify(data=data)
 
  
@@ -326,16 +326,6 @@ def save():
     does_recipe_exist = True if len(models.Recipe.query.filter_by(recipe=recipe).all()) != 0 else False # flipped the == to != for new save
     if(does_recipe_exist):
         Recipe = models.Recipe.query.filter_by(recipe=recipe).first()
-        # Recipe = models.Recipe(id=Recipe.id,recipe=recipe, style=style, notes=notes, user_id=user.id)
-        # Get recipe records for an update
-        # system_id = models.Recipe_System.query.filter_by(recipe_id=Recipe.id).first()
-        # fermentables_ids = models.Recipe_Fermentables.query.filter_by(recipe_id=Recipe.id).all()
-        # hops_ids = models.Recipe_Hops.query.filter_by(recipe_id=Recipe.id).all()
-        # mash_id = models.Recipe_Mash.query.filter_by(recipe_id=Recipe.id).first()
-        # yeast_id = models.Recipe_Yeast.query.filter_by(recipe_id=Recipe.id).first()
-        # water_id = models.Recipe_Water.query.filter_by(recipe_id=Recipe.id).first()
-        # fermentation_id = models.Recipe_Fermentation.query.filter_by(recipe_id=Recipe.id).first()
-        # chemistry_id = models.Recipe_Chemistry.query.filter_by(recipe_id=Recipe.id).first()
         System = models.Recipe_System.query.filter_by(recipe_id=Recipe.id).first()
         Fermentables = models.Recipe_Fermentables.query.filter_by(recipe_id=Recipe.id).all()
         Hops = models.Recipe_Hops.query.filter_by(recipe_id=Recipe.id).all()
@@ -344,15 +334,6 @@ def save():
         Water = models.Recipe_Water.query.filter_by(recipe_id=Recipe.id).first()
         Fermentation = models.Recipe_Fermentation.query.filter_by(recipe_id=Recipe.id).first()
         Chemistry = models.Recipe_Chemistry.query.filter_by(recipe_id=Recipe.id).first()
-        # print("this recipe doesn't exist so we are adding it.") # comment out to fix save
-        # recipe_columns = [col.key for col in models.Recipe.__table__.columns]
-        # for col in recipe_columns:
-        #     if col not in ['id', 'user_id']:
-        #         Recipe.__setattr__(col, request.form.get(col, 'attribute not found', type=str))
-        
-        # System
-        # request.form
-        # [i for i in request.form.keys()]
 
         def update_record(record=None, record_number=1):
             record_columns = [col.key for col in record.__table__.columns]
@@ -362,7 +343,10 @@ def save():
                     if record.__tablename__ in ['gb_recipe_fermentables', 'gb_recipe_hops']:
                         record.__setattr__(col, request.form.get(col+str(record_number), 'attribute not found', type=str))
                     else:
-                        record.__setattr__(col, request.form.get(col, 'attribute not found', type=str))        
+                        # if record.__tablename__ in ['gb_recipe_chemistry']:
+                        #     pdb.set_trace()
+                        new_vaue = "0" if request.form.get(col, 'attribute not found', type=str) == 'NaN' else request.form.get(col, 'attribute not found', type=str)
+                        record.__setattr__(col, new_vaue)
 
         def update_record_or_list_of_records(record_or_list_of_records=None):
             if isinstance(record_or_list_of_records, list): 

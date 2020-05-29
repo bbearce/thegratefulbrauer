@@ -1,21 +1,14 @@
-$(function() {
-$('#load').bind('click', function() {
 
-  // Go to load in python and pass in the recipe input value
-  $.getJSON($SCRIPT_ROOT + '/load', {
-    recipe: $('select[id="recipe_load"]').val()
+update_ui = function(data) {
+  loaded_data = data
 
-  // the load() function returns a json object with key value pairs
-  }, function(data) {
-    loaded_data = data
-
-    if (data['recipe'] == "that recipe doesn't exist"){
-    
+  if (data['recipe'] == "that recipe doesn't exist"){
+  
     //*NOTE: Now that things are based on drop downs, this might not ever run...
     // If this recipe doesn't exist in the database then tell the user.
     alert('That recipe doesn\'t exist')
 
-    } else {
+  } else {
     // If this recipe exists in the database then tell the user and load it.
 
     // Recipe
@@ -161,12 +154,30 @@ $('#load').bind('click', function() {
     // System
     change_style_image()
 
-    }
+  }
+
+}
 
 
-    
-
+$(function() {
+  $('#load').bind('click', function() {
+    // Go to load in python and pass in the recipe input value
+    $.getJSON($SCRIPT_ROOT + '/load',
+              {recipe: $('select[id="recipe_load"]').val()}, // sent in
+              function(data){
+                update_ui(data)
+              }
+    );
   });
-  return false;
-});
-});
+})
+
+
+// $.getJSON($SCRIPT_ROOT + '/load',
+//   {recipe: $('select[id="recipe_load"]').val()}, // sent in
+//   function(data){
+//     console.log('data')
+//   }
+// ).fail(function (jqxhr, status, error) {
+//   console.log('asdf');
+//   console.log('error', status, error) }
+// );
